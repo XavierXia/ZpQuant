@@ -193,7 +193,7 @@ MdsApiSample_HandleMsg(MdsApiSessionInfoT *pSessionInfo,
 int
 main(int argc, char *argv[]) {
     /* 配置文件 */
-    static const char   THE_CONFIG_FILE_NAME[] = "mds_client.conf";
+    static const char   THE_CONFIG_FILE_NAME[] = "mds_client_sample.conf";
     /* 尝试等待行情消息到达的超时时间 (毫秒) */
     static const int32  THE_TIMEOUT_MS = 1000;
 
@@ -208,7 +208,7 @@ main(int argc, char *argv[]) {
     if (1) {
         /* 根据证券代码列表重新订阅行情 (根据代码前缀区分所属市场) */
         if (! MdsApiSample_ResubscribeByCodePrefix(&cliEnv.tcpChannel,
-                "600000.SH, 600001.SH")) {
+                "600000, 600001, 000001, 0000002.SZ")) {
             goto ON_ERROR;
         }
     } else {

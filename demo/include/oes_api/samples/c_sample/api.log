@@ -1,0 +1,34 @@
+20190417-23:13:35.750 WARN  [ 1400] (spk_socket_connect.c:575) <api.SNet_ParseSocketOptionConfig> - Current system does not support SO_KEEPALIVE!
+20190417-23:13:35.750 WARN  [ 1400] (spk_socket_connect.c:580) <api.SNet_ParseSocketOptionConfig> - Current system does not support TCP_QUICKACK!
+20190417-23:13:35.750 WARN  [ 1400] (spk_socket_connect.c:585) <api.SNet_ParseSocketOptionConfig> - Current system does not support larger SO_RCVBUF, set to 4096 K!
+20190417-23:13:35.751 WARN  [ 1400] (spk_socket_connect.c:590) <api.SNet_ParseSocketOptionConfig> - Current system does not support larger SO_SNDBUF, set to 4096 K!
+20190417-23:13:35.800 INFO  [ 1400] (oes_api.c:4306) <api.OesApi_Logon> - Logon success! url[tcp://106.15.58.119:6101], time[20190417-23:13:35.800], username[customer368], heartBtInt[30], lastInMsgSeq[0], lastOutMsgSeq[0], nextInMsgSeq[1], nextOutMsgSeq[1], protocolHints[0], localIp[192.168.1.14], localMac[F0:18:98:4F:4F:E6], applVerId(C/S): [0.15.7.4 / 0.15.8]
+20190417-23:13:35.801 WARN  [ 1400] (spk_socket_connect.c:575) <api.SNet_ParseSocketOptionConfig> - Current system does not support SO_KEEPALIVE!
+20190417-23:13:35.801 WARN  [ 1400] (spk_socket_connect.c:580) <api.SNet_ParseSocketOptionConfig> - Current system does not support TCP_QUICKACK!
+20190417-23:13:35.801 WARN  [ 1400] (spk_socket_connect.c:585) <api.SNet_ParseSocketOptionConfig> - Current system does not support larger SO_RCVBUF, set to 4096 K!
+20190417-23:13:35.801 WARN  [ 1400] (spk_socket_connect.c:590) <api.SNet_ParseSocketOptionConfig> - Current system does not support larger SO_SNDBUF, set to 4096 K!
+20190417-23:13:36.133 INFO  [ 1400] (oes_api.c:4306) <api.OesApi_Logon> - Logon success! url[tcp://106.15.58.119:6301], time[20190417-23:13:36.133], username[customer368], heartBtInt[30], lastInMsgSeq[0], lastOutMsgSeq[0], nextInMsgSeq[1], nextOutMsgSeq[1], protocolHints[0], localIp[192.168.1.14], localMac[F0:18:98:4F:4F:E6], applVerId(C/S): [0.15.7.4 / 0.15.8]
+20190417-23:13:36.134 INFO  [ 1400] (oes_api.c:4519) <api.OesApi_SendReportSynchronization> - Send report synchronization request success! server[106.15.58.119:6301], lastRptSeqNum[0], subscribeEnvId[0], subscribeRptTypes[0]
+20190417-23:13:36.136 WARN  [ 1400] (spk_socket_connect.c:575) <api.SNet_ParseSocketOptionConfig> - Current system does not support SO_KEEPALIVE!
+20190417-23:13:36.136 WARN  [ 1400] (spk_socket_connect.c:580) <api.SNet_ParseSocketOptionConfig> - Current system does not support TCP_QUICKACK!
+20190417-23:13:36.136 WARN  [ 1400] (spk_socket_connect.c:585) <api.SNet_ParseSocketOptionConfig> - Current system does not support larger SO_RCVBUF, set to 4096 K!
+20190417-23:13:36.136 WARN  [ 1400] (spk_socket_connect.c:590) <api.SNet_ParseSocketOptionConfig> - Current system does not support larger SO_SNDBUF, set to 4096 K!
+20190417-23:13:36.440 INFO  [ 1400] (oes_api.c:4306) <api.OesApi_Logon> - Logon success! url[tcp://106.15.58.119:6401], time[20190417-23:13:36.440], username[customer368], heartBtInt[30], lastInMsgSeq[0], lastOutMsgSeq[0], nextInMsgSeq[1], nextOutMsgSeq[1], protocolHints[128], localIp[192.168.1.14], localMac[F0:18:98:4F:4F:E6], applVerId(C/S): [0.15.7.4 / 0.15.8]
+20190417-23:13:36.462 DEBUG [ 1400] (oes_client_sample.c:503) <api._OesApiSample_QueryMarketStatus> - Query market state success! total count: [1]
+20190417-23:13:36.488 DEBUG [ 1400] (oes_client_sample.c:145) <api._OesApiSample_QueryClientOverview> - Query client overview success! 
+20190417-23:13:36.511 DEBUG [ 1400] (oes_client_sample.c:371) <api._OesApiSample_QueryCashAsset> - Query cash asset success! total count: [1]
+20190417-23:13:36.533 DEBUG [ 1400] (oes_client_sample.c:308) <api._OesApiSample_QueryStock> - Query stock success! total count: [1]
+20190417-23:13:36.556 DEBUG [ 1400] (oes_client_sample.c:437) <api._OesApiSample_QueryStkHolding> - Query stock holding success! total count: [1]
+20190417-23:13:36.579 DEBUG [ 1400] (oes_client_sample.c:437) <api._OesApiSample_QueryStkHolding> - Query stock holding success! total count: [8]
+20190417-23:13:36.602 DEBUG [ 1400] (oes_client_sample.c:437) <api._OesApiSample_QueryStkHolding> - Query stock holding success! total count: [16]
+20190417-23:13:38.606 INFO  [ 1400] (oes_api.c:4896) <api.OesApi_Logout> - Send logout message success! remote[106.15.58.119:6301]
+20190417-23:13:38.663 INFO  [ 1400] (oes_api.c:4935) <api.OesApi_Logout> - API door-to-door latency statistics. channelType[2], clEnvId[0], remote[106.15.58.119:6301]
+    [rpt-latency] =>             order insert: { count: [      7], avg: [  23227.43] Us }
+    [rpt-latency] =>   SSE stock order report: { count: [      1], avg: [     31.56] Ms }
+    [rpt-latency] =>  SZSE stock order report: { count: [      2], avg: [     34.42] Ms }
+
+20190417-23:13:38.663 INFO  [ 1400] (oes_api.c:4896) <api.OesApi_Logout> - Send logout message success! remote[106.15.58.119:6101]
+20190417-23:13:38.717 INFO  [ 1400] (oes_api.c:4914) <api.OesApi_Logout> - API door-to-door latency statistics. channelType[1], clEnvId[0], remote[106.15.58.119:6101]
+    [ord-latency] =>           socket sending: { count: [      7], avg: [     10.00] Us }
+
+20190417-23:13:38.717 INFO  [ 1400] (oes_api.c:4896) <api.OesApi_Logout> - Send logout message success! remote[106.15.58.119:6401]

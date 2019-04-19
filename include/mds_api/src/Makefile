@@ -4,7 +4,7 @@ INC_DIR   = ../../../include
 #LIB_DIR   = ../../../linux64
 LIB_DIR   = ../../../macos64
 
-CC_CFLAGS = -Wall
+CC_CFLAGS = -Wall -o2
 #CC_LFLAGS = -lmds_api -lpthread -lm
 CC_LFLAGS = -loes_api -lpthread -lm
 
