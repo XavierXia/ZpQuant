@@ -1,4 +1,4 @@
-## ==> make -f Makefile
+## ==> make 
 
 INC_DIR   = ../../../include
 #LIB_DIR   = ../../../linux64

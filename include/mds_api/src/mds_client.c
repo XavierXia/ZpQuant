@@ -541,7 +541,7 @@ MdsApiSample_Main() {
     // MdsApi_SetThreadPassword("123456");
     // MdsApi_SetThreadPassword("txt:123456");
 
-    /* 初始化客户端环境 (配置文件参见: mds_client_sample.conf) */
+    /* 初始化客户端环境 (配置文件参见: mds_client.conf) */
     if (! MdsApi_InitAll(&cliEnv, THE_CONFIG_FILE_NAME,
             MDSAPI_CFG_DEFAULT_SECTION_LOGGER, MDSAPI_CFG_DEFAULT_SECTION,
             MDSAPI_CFG_DEFAULT_KEY_TCP_ADDR, MDSAPI_CFG_DEFAULT_KEY_QRY_ADDR,
@@ -556,94 +556,38 @@ MdsApiSample_Main() {
     */
 
     /* Linux 下的独立行情接收线程 */
-    {
-        pthread_t       tcpThreadId;
-        //pthread_t       udpThreadId;
-        pthread_t       qryThreadId;
-        int32           ret = 0;
-        SLOG_INFO("...>>> MdsApiSample_TcpThreadMain ...");
+    pthread_t       tcpThreadId;
+    //pthread_t       udpThreadId;
+    pthread_t       qryThreadId;
+    int32           ret = 0;
+    SLOG_INFO("...>>> MdsApiSample_TcpThreadMain ...");
 
-        /* 创建TCP行情订阅的接收线程 */
-        if (MdsApi_IsValidTcpChannel(&cliEnv.tcpChannel)) {
-            ret = pthread_create(&tcpThreadId, NULL,
-                    (void* (*)(void *)) MdsApiSample_TcpThreadMain,
-                    &cliEnv.tcpChannel);
-            if (unlikely(ret != 0)) {
-                SLOG_ERROR("创建行情接收线程失败! error[%d]", ret);
-                goto ON_ERROR;
-            }
+    /* 创建TCP行情订阅的接收线程 */
+    if (MdsApi_IsValidTcpChannel(&cliEnv.tcpChannel)) {
+        ret = pthread_create(&tcpThreadId, NULL,
+                (void* (*)(void *)) MdsApiSample_TcpThreadMain,
+                &cliEnv.tcpChannel);
+        if (unlikely(ret != 0)) {
+            SLOG_ERROR("创建行情接收线程失败! error[%d]", ret);
+            goto ON_ERROR;
         }
-
-        /* 创建行情查询线程 */
-        if (MdsApi_IsValidQryChannel(&cliEnv.qryChannel)) {
-            ret = pthread_create(&qryThreadId, NULL,
-                    (void* (*)(void *)) MdsApiSample_QueryThreadMain,
-                    &cliEnv.qryChannel);
-            if (unlikely(ret != 0)) {
-                SLOG_ERROR("创建行情查询线程失败! error[%d]", ret);
-                goto ON_ERROR;
-            }
-        }
-
-        // if (1) {
-        //     /* 创建UDP行情组播的接收线程 (需要在 MdsApi_InitAll 函数中指定 pUdpL1AddrKey 等组播地址参数) */
-        //     if (MdsApi_IsValidChannelGroup(&cliEnv.udpChannelGroup)) {
-        //         ret = pthread_create(&udpThreadId, NULL,
-        //                 (void* (*)(void *)) MdsApiSample_UdpThreadMain,
-        //                 &cliEnv.udpChannelGroup);
-        //         if (unlikely(ret != 0)) {
-        //             SLOG_ERROR("创建行情组播接收线程失败! error[%d]", ret);
-        //             goto ON_ERROR;
-        //         }
-        //     }
-        // } else {
-        //     /* 定制的UDP行情组播接收线程 (通过程序控制对接哪些组播行情) */
-        //     ret = pthread_create(&udpThreadId, NULL,
-        //             (void* (*)(void *)) MdsApiSample_CustomizedUdpThreadMain,
-        //             NULL);
-        //     if (unlikely(ret != 0)) {
-        //         SLOG_ERROR("创建定制的行情组播接收线程失败! error[%d]", ret);
-        //         goto ON_ERROR;
-        //     }
-        // }
     }
 
-    /* 为了测试行情订阅接口，而直接在主线程中循环发送行情订阅请求 */
-    // {
-    //     STimevalT       beginTime = {0, 0};
-    //     STimevalT       endTime1 = {0, 0};
-    //     STimevalT       endTime2 = {0, 0};
+    /* 创建行情查询线程 */
+    if (MdsApi_IsValidQryChannel(&cliEnv.qryChannel)) {
+        ret = pthread_create(&qryThreadId, NULL,
+                (void* (*)(void *)) MdsApiSample_QueryThreadMain,
+                &cliEnv.qryChannel);
+        if (unlikely(ret != 0)) {
+            SLOG_ERROR("创建行情查询线程失败! error[%d]", ret);
+            goto ON_ERROR;
+        }
+    }
 
-        // while (MdsApi_IsValidTcpChannel(&cliEnv.tcpChannel)) {
-        //     SPK_SLEEP_MS(30000);
-
-        //     SLOG_INFO(">>> ...Subscribe stock market data ...");
-            // STime_GetTimeOfDay(&beginTime);
-
-            // MdsApi_SubscribeByString(&cliEnv.tcpChannel,
-            //         "600000, 600001.SH, 000001.SZ", (char *) NULL,
-            //         MDS_EXCH_SSE, MDS_SECURITY_TYPE_STOCK, MDS_SUB_MODE_SET,
-            //         MDS_SUB_DATA_TYPE_L1_SNAPSHOT
-            //                 | MDS_SUB_DATA_TYPE_L2_SNAPSHOT
-            //                 | MDS_SUB_DATA_TYPE_L2_TRADE);
-
-            // /* 追加订阅 000300 指数行情 */
-            // STime_GetTimeOfDay(&endTime1);
-            // SLOG_INFO(">>> Append subscribe index market data ...");
-
-            // MdsApi_SubscribeByString(&cliEnv.tcpChannel,
-            //         "000300.SH", (char *) NULL,
-            //         MDS_EXCH_SSE, MDS_SECURITY_TYPE_INDEX, MDS_SUB_MODE_APPEND,
-            //         MDS_SUB_DATA_TYPE_L1_SNAPSHOT
-            //                 | MDS_SUB_DATA_TYPE_L2_SNAPSHOT
-            //                 | MDS_SUB_DATA_TYPE_L2_TRADE);
-
-            // STime_GetTimeOfDay(&endTime2);
-            // SLOG_INFO("<<< Subscribe market data OK!!! runTime[%.2f,  %.2f] ms",
-            //         STime_DiffMillisecondFloat(&beginTime, &endTime1),
-            //         STime_DiffMillisecondFloat(&beginTime, &endTime2));
-        //}
-    //}
+    while(1)
+    {
+        sleep(100);
+    }
 
     /* 关闭客户端环境, 释放会话数据 */
     MdsApi_LogoutAll(&cliEnv, TRUE);

@@ -102,8 +102,33 @@ MdsApiSample_ResubscribeByCodePostfix(MdsApiSessionInfoT *pTcpChannel,
 static int32
 MdsApiSample_HandleMsg(MdsApiSessionInfoT *pSessionInfo,
         SMsgHeadT *pMsgHead, void *pMsgBody, void *pCallbackParams) {
-    MdsMktRspMsgBodyT   *pRspMsg = (MdsMktRspMsgBodyT *) pMsgBody;
 
+    char                encodeBuf[8192] = {0};
+    char                *pStrMsg = (char *) NULL;
+
+    printf("... 接收到MdsApiSample_HandleMsg消息");
+    if (pSessionInfo->protocolType == SMSG_PROTO_BINARY) {
+        /* 将行情消息转换为JSON格式的文本数据 */
+        pStrMsg = (char *) MdsJsonParser_EncodeRsp(
+                pMsgHead, (MdsMktRspMsgBodyT *) pMsgBody,
+                encodeBuf, sizeof(encodeBuf),
+                pSessionInfo->channel.remoteAddr);
+    } else {
+        pStrMsg = (char *) pMsgBody;
+       
+    }
+
+    if (pMsgHead->msgSize > 0) {
+        pStrMsg[pMsgHead->msgSize - 1] = '\0';
+        printf( "{" \
+                "\"msgType\":%" __SPK_FMT_HH__ "u, " \
+                "\"mktData\":%s" \
+                "}\n",
+                pMsgHead->msgId,
+                pStrMsg);
+    } 
+
+    MdsMktRspMsgBodyT   *pRspMsg = (MdsMktRspMsgBodyT *) pMsgBody;
     /*
      * 根据消息类型对行情消息进行处理
      */
@@ -193,6 +218,7 @@ MdsApiSample_HandleMsg(MdsApiSessionInfoT *pSessionInfo,
 int
 main(int argc, char *argv[]) {
     /* 配置文件 */
+    //static const char   THE_CONFIG_FILE_NAME[] = "mds_subscribe.conf";
     static const char   THE_CONFIG_FILE_NAME[] = "mds_client.conf";
     /* 尝试等待行情消息到达的超时时间 (毫秒) */
     static const int32  THE_TIMEOUT_MS = 1000;
@@ -208,7 +234,7 @@ main(int argc, char *argv[]) {
     if (1) {
         /* 根据证券代码列表重新订阅行情 (根据代码前缀区分所属市场) */
         if (! MdsApiSample_ResubscribeByCodePrefix(&cliEnv.tcpChannel,
-                "600000.SH, 600001.SH")) {
+                "601881.SH")) {
             goto ON_ERROR;
         }
     } else {

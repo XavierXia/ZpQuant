@@ -1,32 +1,310 @@
-20190419-17:53:01.810 WARN  [35067] (spk_socket_connect.c:575) <api.SNet_ParseSocketOptionConfig> - Current system does not support SO_KEEPALIVE!
-20190419-17:53:01.810 WARN  [35067] (spk_socket_connect.c:580) <api.SNet_ParseSocketOptionConfig> - Current system does not support TCP_QUICKACK!
-20190419-17:53:01.810 WARN  [35067] (spk_socket_connect.c:585) <api.SNet_ParseSocketOptionConfig> - Current system does not support larger SO_RCVBUF, set to 4096 K!
-20190419-17:53:01.850 ERROR [35067] (mds_api.c:620) <api.MdsApi_Logon> - Logon request rejected by server! url[tcp://139.196.228.232:5103], username[customer368], errCode[1002], errMsg[当前主机不是主节点]
-20190419-17:53:01.861 ERROR [35067] (mds_api.c:3205) <api.MdsApi_InitTcpChannel2> - Logon MDS cluster (ReplicaSet) failure!
-20190419-17:53:01.861 ERROR [35067] (mds_api.c:2661) <api.MdsApi_InitAll> - Init tcp channel failure!
-20190419-17:53:23.447 WARN  [35071] (spk_socket_connect.c:575) <api.SNet_ParseSocketOptionConfig> - Current system does not support SO_KEEPALIVE!
-20190419-17:53:23.447 WARN  [35071] (spk_socket_connect.c:580) <api.SNet_ParseSocketOptionConfig> - Current system does not support TCP_QUICKACK!
-20190419-17:53:23.448 WARN  [35071] (spk_socket_connect.c:585) <api.SNet_ParseSocketOptionConfig> - Current system does not support larger SO_RCVBUF, set to 4096 K!
-20190419-17:53:23.492 ERROR [35071] (mds_api.c:620) <api.MdsApi_Logon> - Logon request rejected by server! url[tcp://139.196.228.232:5103], username[customer368], errCode[1002], errMsg[当前主机不是主节点]
-20190419-17:53:23.503 ERROR [35071] (mds_api.c:3205) <api.MdsApi_InitTcpChannel2> - Logon MDS cluster (ReplicaSet) failure!
-20190419-17:53:23.503 ERROR [35071] (mds_api.c:2661) <api.MdsApi_InitAll> - Init tcp channel failure!
-20190419-17:53:42.024 WARN  [35074] (spk_socket_connect.c:575) <api.SNet_ParseSocketOptionConfig> - Current system does not support SO_KEEPALIVE!
-20190419-17:53:42.024 WARN  [35074] (spk_socket_connect.c:580) <api.SNet_ParseSocketOptionConfig> - Current system does not support TCP_QUICKACK!
-20190419-17:53:42.024 WARN  [35074] (spk_socket_connect.c:585) <api.SNet_ParseSocketOptionConfig> - Current system does not support larger SO_RCVBUF, set to 4096 K!
-20190419-17:53:42.043 ERROR [35074] (spk_tcp_connect.c:584) <api._SNet_ConnectToTcp> - connection refused! remoteIp[139.196.228.232], remotePort[5103], SO_ERROR[61]
-20190419-17:53:42.044 ERROR [35074] (mds_api.c:510) <api.MdsApi_Logon> - Connect to server failure! url[tcp://139.196.228.232:5103], error[61]
-20190419-17:53:42.044 ERROR [35074] (mds_api.c:3205) <api.MdsApi_InitTcpChannel2> - Logon MDS cluster (ReplicaSet) failure!
-20190419-17:53:42.044 ERROR [35074] (mds_api.c:2661) <api.MdsApi_InitAll> - Init tcp channel failure!
-20190419-17:53:43.887 WARN  [35076] (spk_socket_connect.c:575) <api.SNet_ParseSocketOptionConfig> - Current system does not support SO_KEEPALIVE!
-20190419-17:53:43.887 WARN  [35076] (spk_socket_connect.c:580) <api.SNet_ParseSocketOptionConfig> - Current system does not support TCP_QUICKACK!
-20190419-17:53:43.888 WARN  [35076] (spk_socket_connect.c:585) <api.SNet_ParseSocketOptionConfig> - Current system does not support larger SO_RCVBUF, set to 4096 K!
-20190419-17:53:43.940 ERROR [35076] (mds_api.c:620) <api.MdsApi_Logon> - Logon request rejected by server! url[tcp://139.196.228.232:5103], username[customer368], errCode[1002], errMsg[当前主机不是主节点]
-20190419-17:53:43.952 ERROR [35076] (mds_api.c:3205) <api.MdsApi_InitTcpChannel2> - Logon MDS cluster (ReplicaSet) failure!
-20190419-17:53:43.953 ERROR [35076] (mds_api.c:2661) <api.MdsApi_InitAll> - Init tcp channel failure!
-20190419-17:55:15.178 WARN  [35123] (spk_socket_connect.c:575) <api.SNet_ParseSocketOptionConfig> - Current system does not support SO_KEEPALIVE!
-20190419-17:55:15.178 WARN  [35123] (spk_socket_connect.c:580) <api.SNet_ParseSocketOptionConfig> - Current system does not support TCP_QUICKACK!
-20190419-17:55:15.178 WARN  [35123] (spk_socket_connect.c:585) <api.SNet_ParseSocketOptionConfig> - Current system does not support larger SO_RCVBUF, set to 4096 K!
-20190419-17:55:15.201 ERROR [35123] (spk_tcp_connect.c:584) <api._SNet_ConnectToTcp> - connection refused! remoteIp[139.196.228.232], remotePort[5103], SO_ERROR[61]
-20190419-17:55:15.201 ERROR [35123] (mds_api.c:510) <api.MdsApi_Logon> - Connect to server failure! url[tcp://139.196.228.232:5103], error[61]
-20190419-17:55:15.201 ERROR [35123] (mds_api.c:3205) <api.MdsApi_InitTcpChannel2> - Logon MDS cluster (ReplicaSet) failure!
-20190419-17:55:15.201 ERROR [35123] (mds_api.c:2661) <api.MdsApi_InitAll> - Init tcp channel failure!
+20190419-19:34:50.881 WARN  [ 1078] (spk_socket_connect.c:575) <api.SNet_ParseSocketOptionConfig> - Current system does not support SO_KEEPALIVE!
+20190419-19:34:50.881 WARN  [ 1078] (spk_socket_connect.c:580) <api.SNet_ParseSocketOptionConfig> - Current system does not support TCP_QUICKACK!
+20190419-19:34:50.882 WARN  [ 1078] (spk_socket_connect.c:585) <api.SNet_ParseSocketOptionConfig> - Current system does not support larger SO_RCVBUF, set to 4096 K!
+20190419-19:34:51.159 INFO  [ 1078] (mds_api.c:670) <api.MdsApi_Logon> - Logon success! url[tcp://139.196.228.232:5103], time[20190419-19:34:51.159], username[customer368], heartBtInt[30], applVerId(C/S)[0.15.7.4 / 0.15.8.5]
+20190419-19:34:51.187 WARN  [ 1078] (spk_socket_connect.c:575) <api.SNet_ParseSocketOptionConfig> - Current system does not support SO_KEEPALIVE!
+20190419-19:34:51.188 WARN  [ 1078] (spk_socket_connect.c:580) <api.SNet_ParseSocketOptionConfig> - Current system does not support TCP_QUICKACK!
+20190419-19:34:51.188 WARN  [ 1078] (spk_socket_connect.c:585) <api.SNet_ParseSocketOptionConfig> - Current system does not support larger SO_RCVBUF, set to 4096 K!
+20190419-19:34:51.456 INFO  [ 1078] (mds_api.c:670) <api.MdsApi_Logon> - Logon success! url[tcp://139.196.228.232:5203], time[20190419-19:34:51.456], username[customer368], heartBtInt[30], applVerId(C/S)[0.15.7.4 / 0.15.8.5]
+20190419-19:34:51.457 INFO  [ 1078] (mds_client.c:563) <api.MdsApiSample_Main> - ...>>> MdsApiSample_TcpThreadMain ...
+20190419-19:40:09.733 WARN  [ 1106] (spk_socket_connect.c:575) <api.SNet_ParseSocketOptionConfig> - Current system does not support SO_KEEPALIVE!
+20190419-19:40:09.733 WARN  [ 1106] (spk_socket_connect.c:580) <api.SNet_ParseSocketOptionConfig> - Current system does not support TCP_QUICKACK!
+20190419-19:40:09.733 WARN  [ 1106] (spk_socket_connect.c:585) <api.SNet_ParseSocketOptionConfig> - Current system does not support larger SO_RCVBUF, set to 4096 K!
+20190419-19:40:09.733 WARN  [ 1106] (spk_socket_connect.c:575) <api.SNet_ParseSocketOptionConfig> - Current system does not support SO_KEEPALIVE!
+20190419-19:40:09.733 WARN  [ 1106] (spk_socket_connect.c:580) <api.SNet_ParseSocketOptionConfig> - Current system does not support TCP_QUICKACK!
+20190419-19:40:09.733 WARN  [ 1106] (spk_socket_connect.c:585) <api.SNet_ParseSocketOptionConfig> - Current system does not support larger SO_RCVBUF, set to 4096 K!
+20190419-19:40:09.733 WARN  [ 1106] (spk_socket_connect.c:575) <api.SNet_ParseSocketOptionConfig> - Current system does not support SO_KEEPALIVE!
+20190419-19:40:09.733 WARN  [ 1106] (spk_socket_connect.c:580) <api.SNet_ParseSocketOptionConfig> - Current system does not support TCP_QUICKACK!
+20190419-19:40:09.733 WARN  [ 1106] (spk_socket_connect.c:585) <api.SNet_ParseSocketOptionConfig> - Current system does not support larger SO_RCVBUF, set to 4096 K!
+20190419-19:40:09.734 WARN  [ 1106] (spk_socket_connect.c:575) <api.SNet_ParseSocketOptionConfig> - Current system does not support SO_KEEPALIVE!
+20190419-19:40:09.734 WARN  [ 1106] (spk_socket_connect.c:580) <api.SNet_ParseSocketOptionConfig> - Current system does not support TCP_QUICKACK!
+20190419-19:40:09.734 WARN  [ 1106] (spk_socket_connect.c:585) <api.SNet_ParseSocketOptionConfig> - Current system does not support larger SO_RCVBUF, set to 4096 K!
+20190419-19:40:09.734 WARN  [ 1106] (spk_socket_connect.c:575) <api.SNet_ParseSocketOptionConfig> - Current system does not support SO_KEEPALIVE!
+20190419-19:40:09.734 WARN  [ 1106] (spk_socket_connect.c:580) <api.SNet_ParseSocketOptionConfig> - Current system does not support TCP_QUICKACK!
+20190419-19:40:09.734 WARN  [ 1106] (spk_socket_connect.c:585) <api.SNet_ParseSocketOptionConfig> - Current system does not support larger SO_RCVBUF, set to 4096 K!
+20190419-19:40:09.734 WARN  [ 1106] (spk_socket_connect.c:575) <api.SNet_ParseSocketOptionConfig> - Current system does not support SO_KEEPALIVE!
+20190419-19:40:09.734 WARN  [ 1106] (spk_socket_connect.c:580) <api.SNet_ParseSocketOptionConfig> - Current system does not support TCP_QUICKACK!
+20190419-19:40:09.734 WARN  [ 1106] (spk_socket_connect.c:585) <api.SNet_ParseSocketOptionConfig> - Current system does not support larger SO_RCVBUF, set to 4096 K!
+20190419-19:40:09.788 INFO  [ 1106] (mds_api.c:670) <api.MdsApi_Logon> - Logon success! url[tcp://139.196.228.232:5103], time[20190419-19:40:09.788], username[customer368], heartBtInt[30], applVerId(C/S)[0.15.7.4 / 0.15.8.5]
+20190419-19:40:09.869 INFO  [ 1106] (mds_api.c:670) <api.MdsApi_Logon> - Logon success! url[tcp://139.196.228.232:5203], time[20190419-19:40:09.869], username[customer368], heartBtInt[30], applVerId(C/S)[0.15.7.4 / 0.15.8.5]
+20190419-19:40:31.607 WARN  [ 1107] (spk_socket_connect.c:575) <api.SNet_ParseSocketOptionConfig> - Current system does not support SO_KEEPALIVE!
+20190419-19:40:31.608 WARN  [ 1107] (spk_socket_connect.c:580) <api.SNet_ParseSocketOptionConfig> - Current system does not support TCP_QUICKACK!
+20190419-19:40:31.609 WARN  [ 1107] (spk_socket_connect.c:585) <api.SNet_ParseSocketOptionConfig> - Current system does not support larger SO_RCVBUF, set to 4096 K!
+20190419-19:40:31.947 INFO  [ 1107] (mds_api.c:670) <api.MdsApi_Logon> - Logon success! url[tcp://139.196.228.232:5103], time[20190419-19:40:31.947], username[customer368], heartBtInt[30], applVerId(C/S)[0.15.7.4 / 0.15.8.5]
+20190419-19:40:31.972 WARN  [ 1107] (spk_socket_connect.c:575) <api.SNet_ParseSocketOptionConfig> - Current system does not support SO_KEEPALIVE!
+20190419-19:40:31.973 WARN  [ 1107] (spk_socket_connect.c:580) <api.SNet_ParseSocketOptionConfig> - Current system does not support TCP_QUICKACK!
+20190419-19:40:31.973 WARN  [ 1107] (spk_socket_connect.c:585) <api.SNet_ParseSocketOptionConfig> - Current system does not support larger SO_RCVBUF, set to 4096 K!
+20190419-19:40:32.067 INFO  [ 1107] (mds_api.c:670) <api.MdsApi_Logon> - Logon success! url[tcp://139.196.228.232:5203], time[20190419-19:40:32.067], username[customer368], heartBtInt[30], applVerId(C/S)[0.15.7.4 / 0.15.8.5]
+20190419-19:40:32.069 INFO  [ 1107] (mds_client.c:563) <api.MdsApiSample_Main> - ...>>> MdsApiSample_TcpThreadMain ...
+20190419-22:54:01.696 WARN  [ 1455] (spk_socket_connect.c:575) <api.SNet_ParseSocketOptionConfig> - Current system does not support SO_KEEPALIVE!
+20190419-22:54:01.697 WARN  [ 1455] (spk_socket_connect.c:580) <api.SNet_ParseSocketOptionConfig> - Current system does not support TCP_QUICKACK!
+20190419-22:54:01.697 WARN  [ 1455] (spk_socket_connect.c:585) <api.SNet_ParseSocketOptionConfig> - Current system does not support larger SO_RCVBUF, set to 4096 K!
+20190419-22:54:01.746 INFO  [ 1455] (mds_api.c:670) <api.MdsApi_Logon> - Logon success! url[tcp://139.196.228.232:5103], time[20190419-22:54:01.746], username[customer368], heartBtInt[30], applVerId(C/S)[0.15.7.4 / 0.15.8.5]
+20190419-22:54:01.808 WARN  [ 1455] (spk_socket_connect.c:575) <api.SNet_ParseSocketOptionConfig> - Current system does not support SO_KEEPALIVE!
+20190419-22:54:01.808 WARN  [ 1455] (spk_socket_connect.c:580) <api.SNet_ParseSocketOptionConfig> - Current system does not support TCP_QUICKACK!
+20190419-22:54:01.809 WARN  [ 1455] (spk_socket_connect.c:585) <api.SNet_ParseSocketOptionConfig> - Current system does not support larger SO_RCVBUF, set to 4096 K!
+20190419-22:54:01.856 INFO  [ 1455] (mds_api.c:670) <api.MdsApi_Logon> - Logon success! url[tcp://139.196.228.232:5203], time[20190419-22:54:01.856], username[customer368], heartBtInt[30], applVerId(C/S)[0.15.7.4 / 0.15.8.5]
+20190419-22:54:01.856 INFO  [ 1455] (mds_client.c:563) <api.MdsApiSample_Main> - ...>>> MdsApiSample_TcpThreadMain ...
+20190419-22:56:45.897 WARN  [ 1479] (spk_socket_connect.c:575) <api.SNet_ParseSocketOptionConfig> - Current system does not support SO_KEEPALIVE!
+20190419-22:56:45.897 WARN  [ 1479] (spk_socket_connect.c:580) <api.SNet_ParseSocketOptionConfig> - Current system does not support TCP_QUICKACK!
+20190419-22:56:45.897 WARN  [ 1479] (spk_socket_connect.c:585) <api.SNet_ParseSocketOptionConfig> - Current system does not support larger SO_RCVBUF, set to 4096 K!
+20190419-22:56:45.898 WARN  [ 1479] (spk_socket_connect.c:575) <api.SNet_ParseSocketOptionConfig> - Current system does not support SO_KEEPALIVE!
+20190419-22:56:45.898 WARN  [ 1479] (spk_socket_connect.c:580) <api.SNet_ParseSocketOptionConfig> - Current system does not support TCP_QUICKACK!
+20190419-22:56:45.898 WARN  [ 1479] (spk_socket_connect.c:585) <api.SNet_ParseSocketOptionConfig> - Current system does not support larger SO_RCVBUF, set to 4096 K!
+20190419-22:56:45.898 WARN  [ 1479] (spk_socket_connect.c:575) <api.SNet_ParseSocketOptionConfig> - Current system does not support SO_KEEPALIVE!
+20190419-22:56:45.898 WARN  [ 1479] (spk_socket_connect.c:580) <api.SNet_ParseSocketOptionConfig> - Current system does not support TCP_QUICKACK!
+20190419-22:56:45.898 WARN  [ 1479] (spk_socket_connect.c:585) <api.SNet_ParseSocketOptionConfig> - Current system does not support larger SO_RCVBUF, set to 4096 K!
+20190419-22:56:45.898 WARN  [ 1479] (spk_socket_connect.c:575) <api.SNet_ParseSocketOptionConfig> - Current system does not support SO_KEEPALIVE!
+20190419-22:56:45.898 WARN  [ 1479] (spk_socket_connect.c:580) <api.SNet_ParseSocketOptionConfig> - Current system does not support TCP_QUICKACK!
+20190419-22:56:45.899 WARN  [ 1479] (spk_socket_connect.c:585) <api.SNet_ParseSocketOptionConfig> - Current system does not support larger SO_RCVBUF, set to 4096 K!
+20190419-22:56:45.899 WARN  [ 1479] (spk_socket_connect.c:575) <api.SNet_ParseSocketOptionConfig> - Current system does not support SO_KEEPALIVE!
+20190419-22:56:45.899 WARN  [ 1479] (spk_socket_connect.c:580) <api.SNet_ParseSocketOptionConfig> - Current system does not support TCP_QUICKACK!
+20190419-22:56:45.899 WARN  [ 1479] (spk_socket_connect.c:585) <api.SNet_ParseSocketOptionConfig> - Current system does not support larger SO_RCVBUF, set to 4096 K!
+20190419-22:56:45.899 WARN  [ 1479] (spk_socket_connect.c:575) <api.SNet_ParseSocketOptionConfig> - Current system does not support SO_KEEPALIVE!
+20190419-22:56:45.899 WARN  [ 1479] (spk_socket_connect.c:580) <api.SNet_ParseSocketOptionConfig> - Current system does not support TCP_QUICKACK!
+20190419-22:56:45.899 WARN  [ 1479] (spk_socket_connect.c:585) <api.SNet_ParseSocketOptionConfig> - Current system does not support larger SO_RCVBUF, set to 4096 K!
+20190419-22:56:45.968 INFO  [ 1479] (mds_api.c:670) <api.MdsApi_Logon> - Logon success! url[tcp://139.196.228.232:5103], time[20190419-22:56:45.968], username[customer368], heartBtInt[30], applVerId(C/S)[0.15.7.4 / 0.15.8.5]
+20190419-22:56:46.067 INFO  [ 1479] (mds_api.c:670) <api.MdsApi_Logon> - Logon success! url[tcp://139.196.228.232:5203], time[20190419-22:56:46.067], username[customer368], heartBtInt[30], applVerId(C/S)[0.15.7.4 / 0.15.8.5]
+20190419-22:59:47.684 WARN  [ 1507] (spk_socket_connect.c:575) <api.SNet_ParseSocketOptionConfig> - Current system does not support SO_KEEPALIVE!
+20190419-22:59:47.685 WARN  [ 1507] (spk_socket_connect.c:580) <api.SNet_ParseSocketOptionConfig> - Current system does not support TCP_QUICKACK!
+20190419-22:59:47.685 WARN  [ 1507] (spk_socket_connect.c:585) <api.SNet_ParseSocketOptionConfig> - Current system does not support larger SO_RCVBUF, set to 4096 K!
+20190419-22:59:47.685 WARN  [ 1507] (spk_socket_connect.c:575) <api.SNet_ParseSocketOptionConfig> - Current system does not support SO_KEEPALIVE!
+20190419-22:59:47.685 WARN  [ 1507] (spk_socket_connect.c:580) <api.SNet_ParseSocketOptionConfig> - Current system does not support TCP_QUICKACK!
+20190419-22:59:47.686 WARN  [ 1507] (spk_socket_connect.c:585) <api.SNet_ParseSocketOptionConfig> - Current system does not support larger SO_RCVBUF, set to 4096 K!
+20190419-22:59:47.686 WARN  [ 1507] (spk_socket_connect.c:575) <api.SNet_ParseSocketOptionConfig> - Current system does not support SO_KEEPALIVE!
+20190419-22:59:47.686 WARN  [ 1507] (spk_socket_connect.c:580) <api.SNet_ParseSocketOptionConfig> - Current system does not support TCP_QUICKACK!
+20190419-22:59:47.686 WARN  [ 1507] (spk_socket_connect.c:585) <api.SNet_ParseSocketOptionConfig> - Current system does not support larger SO_RCVBUF, set to 4096 K!
+20190419-22:59:47.686 WARN  [ 1507] (spk_socket_connect.c:575) <api.SNet_ParseSocketOptionConfig> - Current system does not support SO_KEEPALIVE!
+20190419-22:59:47.687 WARN  [ 1507] (spk_socket_connect.c:580) <api.SNet_ParseSocketOptionConfig> - Current system does not support TCP_QUICKACK!
+20190419-22:59:47.687 WARN  [ 1507] (spk_socket_connect.c:585) <api.SNet_ParseSocketOptionConfig> - Current system does not support larger SO_RCVBUF, set to 4096 K!
+20190419-22:59:47.687 WARN  [ 1507] (spk_socket_connect.c:575) <api.SNet_ParseSocketOptionConfig> - Current system does not support SO_KEEPALIVE!
+20190419-22:59:47.687 WARN  [ 1507] (spk_socket_connect.c:580) <api.SNet_ParseSocketOptionConfig> - Current system does not support TCP_QUICKACK!
+20190419-22:59:47.687 WARN  [ 1507] (spk_socket_connect.c:585) <api.SNet_ParseSocketOptionConfig> - Current system does not support larger SO_RCVBUF, set to 4096 K!
+20190419-22:59:47.687 WARN  [ 1507] (spk_socket_connect.c:575) <api.SNet_ParseSocketOptionConfig> - Current system does not support SO_KEEPALIVE!
+20190419-22:59:47.687 WARN  [ 1507] (spk_socket_connect.c:580) <api.SNet_ParseSocketOptionConfig> - Current system does not support TCP_QUICKACK!
+20190419-22:59:47.687 WARN  [ 1507] (spk_socket_connect.c:585) <api.SNet_ParseSocketOptionConfig> - Current system does not support larger SO_RCVBUF, set to 4096 K!
+20190419-22:59:47.744 INFO  [ 1507] (mds_api.c:670) <api.MdsApi_Logon> - Logon success! url[tcp://139.196.228.232:5103], time[20190419-22:59:47.744], username[customer368], heartBtInt[30], applVerId(C/S)[0.15.7.4 / 0.15.8.5]
+20190419-22:59:47.833 INFO  [ 1507] (mds_api.c:670) <api.MdsApi_Logon> - Logon success! url[tcp://139.196.228.232:5203], time[20190419-22:59:47.833], username[customer368], heartBtInt[30], applVerId(C/S)[0.15.7.4 / 0.15.8.5]
+20190419-23:00:21.814 WARN  [ 1514] (spk_socket_connect.c:575) <api.SNet_ParseSocketOptionConfig> - Current system does not support SO_KEEPALIVE!
+20190419-23:00:21.814 WARN  [ 1514] (spk_socket_connect.c:580) <api.SNet_ParseSocketOptionConfig> - Current system does not support TCP_QUICKACK!
+20190419-23:00:21.815 WARN  [ 1514] (spk_socket_connect.c:585) <api.SNet_ParseSocketOptionConfig> - Current system does not support larger SO_RCVBUF, set to 4096 K!
+20190419-23:00:21.865 INFO  [ 1514] (mds_api.c:670) <api.MdsApi_Logon> - Logon success! url[tcp://139.196.228.232:5103], time[20190419-23:00:21.865], username[customer368], heartBtInt[30], applVerId(C/S)[0.15.7.4 / 0.15.8.5]
+20190419-23:00:21.888 WARN  [ 1514] (spk_socket_connect.c:575) <api.SNet_ParseSocketOptionConfig> - Current system does not support SO_KEEPALIVE!
+20190419-23:00:21.888 WARN  [ 1514] (spk_socket_connect.c:580) <api.SNet_ParseSocketOptionConfig> - Current system does not support TCP_QUICKACK!
+20190419-23:00:21.889 WARN  [ 1514] (spk_socket_connect.c:585) <api.SNet_ParseSocketOptionConfig> - Current system does not support larger SO_RCVBUF, set to 4096 K!
+20190419-23:00:21.939 INFO  [ 1514] (mds_api.c:670) <api.MdsApi_Logon> - Logon success! url[tcp://139.196.228.232:5203], time[20190419-23:00:21.939], username[customer368], heartBtInt[30], applVerId(C/S)[0.15.7.4 / 0.15.8.5]
+20190419-23:00:21.940 INFO  [ 1514] (mds_client.c:563) <api.MdsApiSample_Main> - ...>>> MdsApiSample_TcpThreadMain ...
+20190419-23:14:07.913 WARN  [ 1616] (spk_socket_connect.c:575) <api.SNet_ParseSocketOptionConfig> - Current system does not support SO_KEEPALIVE!
+20190419-23:14:07.914 WARN  [ 1616] (spk_socket_connect.c:580) <api.SNet_ParseSocketOptionConfig> - Current system does not support TCP_QUICKACK!
+20190419-23:14:07.914 WARN  [ 1616] (spk_socket_connect.c:585) <api.SNet_ParseSocketOptionConfig> - Current system does not support larger SO_RCVBUF, set to 4096 K!
+20190419-23:14:07.914 WARN  [ 1616] (spk_socket_connect.c:575) <api.SNet_ParseSocketOptionConfig> - Current system does not support SO_KEEPALIVE!
+20190419-23:14:07.914 WARN  [ 1616] (spk_socket_connect.c:580) <api.SNet_ParseSocketOptionConfig> - Current system does not support TCP_QUICKACK!
+20190419-23:14:07.914 WARN  [ 1616] (spk_socket_connect.c:585) <api.SNet_ParseSocketOptionConfig> - Current system does not support larger SO_RCVBUF, set to 4096 K!
+20190419-23:14:07.915 WARN  [ 1616] (spk_socket_connect.c:575) <api.SNet_ParseSocketOptionConfig> - Current system does not support SO_KEEPALIVE!
+20190419-23:14:07.915 WARN  [ 1616] (spk_socket_connect.c:580) <api.SNet_ParseSocketOptionConfig> - Current system does not support TCP_QUICKACK!
+20190419-23:14:07.915 WARN  [ 1616] (spk_socket_connect.c:585) <api.SNet_ParseSocketOptionConfig> - Current system does not support larger SO_RCVBUF, set to 4096 K!
+20190419-23:14:07.915 WARN  [ 1616] (spk_socket_connect.c:575) <api.SNet_ParseSocketOptionConfig> - Current system does not support SO_KEEPALIVE!
+20190419-23:14:07.915 WARN  [ 1616] (spk_socket_connect.c:580) <api.SNet_ParseSocketOptionConfig> - Current system does not support TCP_QUICKACK!
+20190419-23:14:07.916 WARN  [ 1616] (spk_socket_connect.c:585) <api.SNet_ParseSocketOptionConfig> - Current system does not support larger SO_RCVBUF, set to 4096 K!
+20190419-23:14:07.916 WARN  [ 1616] (spk_socket_connect.c:575) <api.SNet_ParseSocketOptionConfig> - Current system does not support SO_KEEPALIVE!
+20190419-23:14:07.916 WARN  [ 1616] (spk_socket_connect.c:580) <api.SNet_ParseSocketOptionConfig> - Current system does not support TCP_QUICKACK!
+20190419-23:14:07.916 WARN  [ 1616] (spk_socket_connect.c:585) <api.SNet_ParseSocketOptionConfig> - Current system does not support larger SO_RCVBUF, set to 4096 K!
+20190419-23:14:07.916 WARN  [ 1616] (spk_socket_connect.c:575) <api.SNet_ParseSocketOptionConfig> - Current system does not support SO_KEEPALIVE!
+20190419-23:14:07.917 WARN  [ 1616] (spk_socket_connect.c:580) <api.SNet_ParseSocketOptionConfig> - Current system does not support TCP_QUICKACK!
+20190419-23:14:07.917 WARN  [ 1616] (spk_socket_connect.c:585) <api.SNet_ParseSocketOptionConfig> - Current system does not support larger SO_RCVBUF, set to 4096 K!
+20190419-23:14:07.968 INFO  [ 1616] (mds_api.c:670) <api.MdsApi_Logon> - Logon success! url[tcp://139.196.228.232:5103], time[20190419-23:14:07.968], username[customer368], heartBtInt[30], applVerId(C/S)[0.15.7.4 / 0.15.8.5]
+20190419-23:14:08.042 INFO  [ 1616] (mds_api.c:670) <api.MdsApi_Logon> - Logon success! url[tcp://139.196.228.232:5203], time[20190419-23:14:08.042], username[customer368], heartBtInt[30], applVerId(C/S)[0.15.7.4 / 0.15.8.5]
+20190419-23:44:09.279 WARN  [ 1685] (spk_socket_connect.c:575) <api.SNet_ParseSocketOptionConfig> - Current system does not support SO_KEEPALIVE!
+20190419-23:44:09.279 WARN  [ 1685] (spk_socket_connect.c:580) <api.SNet_ParseSocketOptionConfig> - Current system does not support TCP_QUICKACK!
+20190419-23:44:09.280 WARN  [ 1685] (spk_socket_connect.c:585) <api.SNet_ParseSocketOptionConfig> - Current system does not support larger SO_RCVBUF, set to 4096 K!
+20190419-23:44:09.345 INFO  [ 1685] (mds_api.c:670) <api.MdsApi_Logon> - Logon success! url[tcp://139.196.228.232:5103], time[20190419-23:44:09.345], username[customer368], heartBtInt[30], applVerId(C/S)[0.15.7.4 / 0.15.8.5]
+20190419-23:44:09.371 WARN  [ 1685] (spk_socket_connect.c:575) <api.SNet_ParseSocketOptionConfig> - Current system does not support SO_KEEPALIVE!
+20190419-23:44:09.372 WARN  [ 1685] (spk_socket_connect.c:580) <api.SNet_ParseSocketOptionConfig> - Current system does not support TCP_QUICKACK!
+20190419-23:44:09.372 WARN  [ 1685] (spk_socket_connect.c:585) <api.SNet_ParseSocketOptionConfig> - Current system does not support larger SO_RCVBUF, set to 4096 K!
+20190419-23:44:09.436 INFO  [ 1685] (mds_api.c:670) <api.MdsApi_Logon> - Logon success! url[tcp://139.196.228.232:5203], time[20190419-23:44:09.436], username[customer368], heartBtInt[30], applVerId(C/S)[0.15.7.4 / 0.15.8.5]
+20190419-23:44:09.436 INFO  [ 1685] (mds_client.c:563) <api.MdsApiSample_Main> - ...>>> MdsApiSample_TcpThreadMain ...
+20190419-23:45:42.500 WARN  [ 1686] (spk_socket_connect.c:575) <api.SNet_ParseSocketOptionConfig> - Current system does not support SO_KEEPALIVE!
+20190419-23:45:42.500 WARN  [ 1686] (spk_socket_connect.c:580) <api.SNet_ParseSocketOptionConfig> - Current system does not support TCP_QUICKACK!
+20190419-23:45:42.500 WARN  [ 1686] (spk_socket_connect.c:585) <api.SNet_ParseSocketOptionConfig> - Current system does not support larger SO_RCVBUF, set to 4096 K!
+20190419-23:45:42.500 WARN  [ 1686] (spk_socket_connect.c:575) <api.SNet_ParseSocketOptionConfig> - Current system does not support SO_KEEPALIVE!
+20190419-23:45:42.501 WARN  [ 1686] (spk_socket_connect.c:580) <api.SNet_ParseSocketOptionConfig> - Current system does not support TCP_QUICKACK!
+20190419-23:45:42.501 WARN  [ 1686] (spk_socket_connect.c:585) <api.SNet_ParseSocketOptionConfig> - Current system does not support larger SO_RCVBUF, set to 4096 K!
+20190419-23:45:42.501 WARN  [ 1686] (spk_socket_connect.c:575) <api.SNet_ParseSocketOptionConfig> - Current system does not support SO_KEEPALIVE!
+20190419-23:45:42.501 WARN  [ 1686] (spk_socket_connect.c:580) <api.SNet_ParseSocketOptionConfig> - Current system does not support TCP_QUICKACK!
+20190419-23:45:42.501 WARN  [ 1686] (spk_socket_connect.c:585) <api.SNet_ParseSocketOptionConfig> - Current system does not support larger SO_RCVBUF, set to 4096 K!
+20190419-23:45:42.501 WARN  [ 1686] (spk_socket_connect.c:575) <api.SNet_ParseSocketOptionConfig> - Current system does not support SO_KEEPALIVE!
+20190419-23:45:42.501 WARN  [ 1686] (spk_socket_connect.c:580) <api.SNet_ParseSocketOptionConfig> - Current system does not support TCP_QUICKACK!
+20190419-23:45:42.501 WARN  [ 1686] (spk_socket_connect.c:585) <api.SNet_ParseSocketOptionConfig> - Current system does not support larger SO_RCVBUF, set to 4096 K!
+20190419-23:45:42.501 WARN  [ 1686] (spk_socket_connect.c:575) <api.SNet_ParseSocketOptionConfig> - Current system does not support SO_KEEPALIVE!
+20190419-23:45:42.501 WARN  [ 1686] (spk_socket_connect.c:580) <api.SNet_ParseSocketOptionConfig> - Current system does not support TCP_QUICKACK!
+20190419-23:45:42.501 WARN  [ 1686] (spk_socket_connect.c:585) <api.SNet_ParseSocketOptionConfig> - Current system does not support larger SO_RCVBUF, set to 4096 K!
+20190419-23:45:42.502 WARN  [ 1686] (spk_socket_connect.c:575) <api.SNet_ParseSocketOptionConfig> - Current system does not support SO_KEEPALIVE!
+20190419-23:45:42.502 WARN  [ 1686] (spk_socket_connect.c:580) <api.SNet_ParseSocketOptionConfig> - Current system does not support TCP_QUICKACK!
+20190419-23:45:42.502 WARN  [ 1686] (spk_socket_connect.c:585) <api.SNet_ParseSocketOptionConfig> - Current system does not support larger SO_RCVBUF, set to 4096 K!
+20190419-23:45:42.552 INFO  [ 1686] (mds_api.c:670) <api.MdsApi_Logon> - Logon success! url[tcp://139.196.228.232:5103], time[20190419-23:45:42.552], username[customer368], heartBtInt[30], applVerId(C/S)[0.15.7.4 / 0.15.8.5]
+20190419-23:45:42.621 INFO  [ 1686] (mds_api.c:670) <api.MdsApi_Logon> - Logon success! url[tcp://139.196.228.232:5203], time[20190419-23:45:42.621], username[customer368], heartBtInt[30], applVerId(C/S)[0.15.7.4 / 0.15.8.5]
+20190419-23:50:00.706 WARN  [ 1686] (_general_client_env.ccc:203) <api.__SGeneralClient_WaitOnMsgImpl> - Read message head failure, connection is broken! addr[139.196.228.232:5103], ret[0], error[35]
+20190419-23:50:00.708 INFO  [ 1686] (mds_api.c:2070) <api.MdsApi_Destory> - MDS-TCP performance statistics. channelType[1], clEnvId[0], remote[139.196.228.232:5103]
+    [mds-tcp]   =>  totalInMsgSize: [112], totalCompressed: [0], totalDecompress: [0], compressionRatio: [0.00 (0.00)]
+
+20190419-23:53:53.391 WARN  [ 1725] (spk_socket_connect.c:575) <api.SNet_ParseSocketOptionConfig> - Current system does not support SO_KEEPALIVE!
+20190419-23:53:53.391 WARN  [ 1725] (spk_socket_connect.c:580) <api.SNet_ParseSocketOptionConfig> - Current system does not support TCP_QUICKACK!
+20190419-23:53:53.393 WARN  [ 1725] (spk_socket_connect.c:585) <api.SNet_ParseSocketOptionConfig> - Current system does not support larger SO_RCVBUF, set to 4096 K!
+20190419-23:53:53.393 WARN  [ 1725] (spk_socket_connect.c:575) <api.SNet_ParseSocketOptionConfig> - Current system does not support SO_KEEPALIVE!
+20190419-23:53:53.393 WARN  [ 1725] (spk_socket_connect.c:580) <api.SNet_ParseSocketOptionConfig> - Current system does not support TCP_QUICKACK!
+20190419-23:53:53.394 WARN  [ 1725] (spk_socket_connect.c:585) <api.SNet_ParseSocketOptionConfig> - Current system does not support larger SO_RCVBUF, set to 4096 K!
+20190419-23:53:53.394 WARN  [ 1725] (spk_socket_connect.c:575) <api.SNet_ParseSocketOptionConfig> - Current system does not support SO_KEEPALIVE!
+20190419-23:53:53.394 WARN  [ 1725] (spk_socket_connect.c:580) <api.SNet_ParseSocketOptionConfig> - Current system does not support TCP_QUICKACK!
+20190419-23:53:53.394 WARN  [ 1725] (spk_socket_connect.c:585) <api.SNet_ParseSocketOptionConfig> - Current system does not support larger SO_RCVBUF, set to 4096 K!
+20190419-23:53:53.394 WARN  [ 1725] (spk_socket_connect.c:575) <api.SNet_ParseSocketOptionConfig> - Current system does not support SO_KEEPALIVE!
+20190419-23:53:53.395 WARN  [ 1725] (spk_socket_connect.c:580) <api.SNet_ParseSocketOptionConfig> - Current system does not support TCP_QUICKACK!
+20190419-23:53:53.395 WARN  [ 1725] (spk_socket_connect.c:585) <api.SNet_ParseSocketOptionConfig> - Current system does not support larger SO_RCVBUF, set to 4096 K!
+20190419-23:53:53.395 WARN  [ 1725] (spk_socket_connect.c:575) <api.SNet_ParseSocketOptionConfig> - Current system does not support SO_KEEPALIVE!
+20190419-23:53:53.395 WARN  [ 1725] (spk_socket_connect.c:580) <api.SNet_ParseSocketOptionConfig> - Current system does not support TCP_QUICKACK!
+20190419-23:53:53.395 WARN  [ 1725] (spk_socket_connect.c:585) <api.SNet_ParseSocketOptionConfig> - Current system does not support larger SO_RCVBUF, set to 4096 K!
+20190419-23:53:53.395 WARN  [ 1725] (spk_socket_connect.c:575) <api.SNet_ParseSocketOptionConfig> - Current system does not support SO_KEEPALIVE!
+20190419-23:53:53.395 WARN  [ 1725] (spk_socket_connect.c:580) <api.SNet_ParseSocketOptionConfig> - Current system does not support TCP_QUICKACK!
+20190419-23:53:53.395 WARN  [ 1725] (spk_socket_connect.c:585) <api.SNet_ParseSocketOptionConfig> - Current system does not support larger SO_RCVBUF, set to 4096 K!
+20190419-23:53:53.450 ERROR [ 1725] (mds_api.c:620) <api.MdsApi_Logon> - Logon request rejected by server! url[tcp://139.196.228.232:5103], username[customer368], errCode[1002], errMsg[当前主机不是主节点]
+20190419-23:53:53.462 ERROR [ 1725] (mds_api.c:3205) <api.MdsApi_InitTcpChannel2> - Logon MDS cluster (ReplicaSet) failure!
+20190419-23:53:53.462 ERROR [ 1725] (mds_api.c:2872) <api.MdsApi_InitAllByConvention> - Init tcp channel failure!
+20190419-23:54:10.137 WARN  [ 1732] (spk_socket_connect.c:575) <api.SNet_ParseSocketOptionConfig> - Current system does not support SO_KEEPALIVE!
+20190419-23:54:10.138 WARN  [ 1732] (spk_socket_connect.c:580) <api.SNet_ParseSocketOptionConfig> - Current system does not support TCP_QUICKACK!
+20190419-23:54:10.139 WARN  [ 1732] (spk_socket_connect.c:585) <api.SNet_ParseSocketOptionConfig> - Current system does not support larger SO_RCVBUF, set to 4096 K!
+20190419-23:54:10.140 WARN  [ 1732] (spk_socket_connect.c:575) <api.SNet_ParseSocketOptionConfig> - Current system does not support SO_KEEPALIVE!
+20190419-23:54:10.140 WARN  [ 1732] (spk_socket_connect.c:580) <api.SNet_ParseSocketOptionConfig> - Current system does not support TCP_QUICKACK!
+20190419-23:54:10.140 WARN  [ 1732] (spk_socket_connect.c:585) <api.SNet_ParseSocketOptionConfig> - Current system does not support larger SO_RCVBUF, set to 4096 K!
+20190419-23:54:10.140 WARN  [ 1732] (spk_socket_connect.c:575) <api.SNet_ParseSocketOptionConfig> - Current system does not support SO_KEEPALIVE!
+20190419-23:54:10.140 WARN  [ 1732] (spk_socket_connect.c:580) <api.SNet_ParseSocketOptionConfig> - Current system does not support TCP_QUICKACK!
+20190419-23:54:10.140 WARN  [ 1732] (spk_socket_connect.c:585) <api.SNet_ParseSocketOptionConfig> - Current system does not support larger SO_RCVBUF, set to 4096 K!
+20190419-23:54:10.140 WARN  [ 1732] (spk_socket_connect.c:575) <api.SNet_ParseSocketOptionConfig> - Current system does not support SO_KEEPALIVE!
+20190419-23:54:10.140 WARN  [ 1732] (spk_socket_connect.c:580) <api.SNet_ParseSocketOptionConfig> - Current system does not support TCP_QUICKACK!
+20190419-23:54:10.141 WARN  [ 1732] (spk_socket_connect.c:585) <api.SNet_ParseSocketOptionConfig> - Current system does not support larger SO_RCVBUF, set to 4096 K!
+20190419-23:54:10.141 WARN  [ 1732] (spk_socket_connect.c:575) <api.SNet_ParseSocketOptionConfig> - Current system does not support SO_KEEPALIVE!
+20190419-23:54:10.141 WARN  [ 1732] (spk_socket_connect.c:580) <api.SNet_ParseSocketOptionConfig> - Current system does not support TCP_QUICKACK!
+20190419-23:54:10.141 WARN  [ 1732] (spk_socket_connect.c:585) <api.SNet_ParseSocketOptionConfig> - Current system does not support larger SO_RCVBUF, set to 4096 K!
+20190419-23:54:10.141 WARN  [ 1732] (spk_socket_connect.c:575) <api.SNet_ParseSocketOptionConfig> - Current system does not support SO_KEEPALIVE!
+20190419-23:54:10.141 WARN  [ 1732] (spk_socket_connect.c:580) <api.SNet_ParseSocketOptionConfig> - Current system does not support TCP_QUICKACK!
+20190419-23:54:10.141 WARN  [ 1732] (spk_socket_connect.c:585) <api.SNet_ParseSocketOptionConfig> - Current system does not support larger SO_RCVBUF, set to 4096 K!
+20190419-23:54:10.195 ERROR [ 1732] (mds_api.c:620) <api.MdsApi_Logon> - Logon request rejected by server! url[tcp://139.196.228.232:5103], username[customer368], errCode[1002], errMsg[当前主机不是主节点]
+20190419-23:54:10.206 ERROR [ 1732] (mds_api.c:3205) <api.MdsApi_InitTcpChannel2> - Logon MDS cluster (ReplicaSet) failure!
+20190419-23:54:10.206 ERROR [ 1732] (mds_api.c:2872) <api.MdsApi_InitAllByConvention> - Init tcp channel failure!
+20190419-23:55:05.756 WARN  [ 1733] (spk_socket_connect.c:575) <api.SNet_ParseSocketOptionConfig> - Current system does not support SO_KEEPALIVE!
+20190419-23:55:05.757 WARN  [ 1733] (spk_socket_connect.c:580) <api.SNet_ParseSocketOptionConfig> - Current system does not support TCP_QUICKACK!
+20190419-23:55:05.757 WARN  [ 1733] (spk_socket_connect.c:585) <api.SNet_ParseSocketOptionConfig> - Current system does not support larger SO_RCVBUF, set to 4096 K!
+20190419-23:55:05.758 WARN  [ 1733] (spk_socket_connect.c:575) <api.SNet_ParseSocketOptionConfig> - Current system does not support SO_KEEPALIVE!
+20190419-23:55:05.758 WARN  [ 1733] (spk_socket_connect.c:580) <api.SNet_ParseSocketOptionConfig> - Current system does not support TCP_QUICKACK!
+20190419-23:55:05.758 WARN  [ 1733] (spk_socket_connect.c:585) <api.SNet_ParseSocketOptionConfig> - Current system does not support larger SO_RCVBUF, set to 4096 K!
+20190419-23:55:05.758 WARN  [ 1733] (spk_socket_connect.c:575) <api.SNet_ParseSocketOptionConfig> - Current system does not support SO_KEEPALIVE!
+20190419-23:55:05.758 WARN  [ 1733] (spk_socket_connect.c:580) <api.SNet_ParseSocketOptionConfig> - Current system does not support TCP_QUICKACK!
+20190419-23:55:05.759 WARN  [ 1733] (spk_socket_connect.c:585) <api.SNet_ParseSocketOptionConfig> - Current system does not support larger SO_RCVBUF, set to 4096 K!
+20190419-23:55:05.759 WARN  [ 1733] (spk_socket_connect.c:575) <api.SNet_ParseSocketOptionConfig> - Current system does not support SO_KEEPALIVE!
+20190419-23:55:05.759 WARN  [ 1733] (spk_socket_connect.c:580) <api.SNet_ParseSocketOptionConfig> - Current system does not support TCP_QUICKACK!
+20190419-23:55:05.759 WARN  [ 1733] (spk_socket_connect.c:585) <api.SNet_ParseSocketOptionConfig> - Current system does not support larger SO_RCVBUF, set to 4096 K!
+20190419-23:55:05.759 WARN  [ 1733] (spk_socket_connect.c:575) <api.SNet_ParseSocketOptionConfig> - Current system does not support SO_KEEPALIVE!
+20190419-23:55:05.760 WARN  [ 1733] (spk_socket_connect.c:580) <api.SNet_ParseSocketOptionConfig> - Current system does not support TCP_QUICKACK!
+20190419-23:55:05.760 WARN  [ 1733] (spk_socket_connect.c:585) <api.SNet_ParseSocketOptionConfig> - Current system does not support larger SO_RCVBUF, set to 4096 K!
+20190419-23:55:05.760 WARN  [ 1733] (spk_socket_connect.c:575) <api.SNet_ParseSocketOptionConfig> - Current system does not support SO_KEEPALIVE!
+20190419-23:55:05.760 WARN  [ 1733] (spk_socket_connect.c:580) <api.SNet_ParseSocketOptionConfig> - Current system does not support TCP_QUICKACK!
+20190419-23:55:05.760 WARN  [ 1733] (spk_socket_connect.c:585) <api.SNet_ParseSocketOptionConfig> - Current system does not support larger SO_RCVBUF, set to 4096 K!
+20190419-23:55:05.788 ERROR [ 1733] (spk_tcp_connect.c:584) <api._SNet_ConnectToTcp> - connection refused! remoteIp[139.196.228.232], remotePort[5103], SO_ERROR[61]
+20190419-23:55:05.788 ERROR [ 1733] (mds_api.c:510) <api.MdsApi_Logon> - Connect to server failure! url[tcp://139.196.228.232:5103], error[61]
+20190419-23:55:05.788 ERROR [ 1733] (mds_api.c:3205) <api.MdsApi_InitTcpChannel2> - Logon MDS cluster (ReplicaSet) failure!
+20190419-23:55:05.789 ERROR [ 1733] (mds_api.c:2872) <api.MdsApi_InitAllByConvention> - Init tcp channel failure!
+20190419-23:55:43.594 WARN  [ 1734] (spk_socket_connect.c:575) <api.SNet_ParseSocketOptionConfig> - Current system does not support SO_KEEPALIVE!
+20190419-23:55:43.594 WARN  [ 1734] (spk_socket_connect.c:580) <api.SNet_ParseSocketOptionConfig> - Current system does not support TCP_QUICKACK!
+20190419-23:55:43.595 WARN  [ 1734] (spk_socket_connect.c:585) <api.SNet_ParseSocketOptionConfig> - Current system does not support larger SO_RCVBUF, set to 4096 K!
+20190419-23:55:43.596 WARN  [ 1734] (spk_socket_connect.c:575) <api.SNet_ParseSocketOptionConfig> - Current system does not support SO_KEEPALIVE!
+20190419-23:55:43.596 WARN  [ 1734] (spk_socket_connect.c:580) <api.SNet_ParseSocketOptionConfig> - Current system does not support TCP_QUICKACK!
+20190419-23:55:43.596 WARN  [ 1734] (spk_socket_connect.c:585) <api.SNet_ParseSocketOptionConfig> - Current system does not support larger SO_RCVBUF, set to 4096 K!
+20190419-23:55:43.596 WARN  [ 1734] (spk_socket_connect.c:575) <api.SNet_ParseSocketOptionConfig> - Current system does not support SO_KEEPALIVE!
+20190419-23:55:43.596 WARN  [ 1734] (spk_socket_connect.c:580) <api.SNet_ParseSocketOptionConfig> - Current system does not support TCP_QUICKACK!
+20190419-23:55:43.596 WARN  [ 1734] (spk_socket_connect.c:585) <api.SNet_ParseSocketOptionConfig> - Current system does not support larger SO_RCVBUF, set to 4096 K!
+20190419-23:55:43.596 WARN  [ 1734] (spk_socket_connect.c:575) <api.SNet_ParseSocketOptionConfig> - Current system does not support SO_KEEPALIVE!
+20190419-23:55:43.596 WARN  [ 1734] (spk_socket_connect.c:580) <api.SNet_ParseSocketOptionConfig> - Current system does not support TCP_QUICKACK!
+20190419-23:55:43.597 WARN  [ 1734] (spk_socket_connect.c:585) <api.SNet_ParseSocketOptionConfig> - Current system does not support larger SO_RCVBUF, set to 4096 K!
+20190419-23:55:43.597 WARN  [ 1734] (spk_socket_connect.c:575) <api.SNet_ParseSocketOptionConfig> - Current system does not support SO_KEEPALIVE!
+20190419-23:55:43.597 WARN  [ 1734] (spk_socket_connect.c:580) <api.SNet_ParseSocketOptionConfig> - Current system does not support TCP_QUICKACK!
+20190419-23:55:43.597 WARN  [ 1734] (spk_socket_connect.c:585) <api.SNet_ParseSocketOptionConfig> - Current system does not support larger SO_RCVBUF, set to 4096 K!
+20190419-23:55:43.597 WARN  [ 1734] (spk_socket_connect.c:575) <api.SNet_ParseSocketOptionConfig> - Current system does not support SO_KEEPALIVE!
+20190419-23:55:43.597 WARN  [ 1734] (spk_socket_connect.c:580) <api.SNet_ParseSocketOptionConfig> - Current system does not support TCP_QUICKACK!
+20190419-23:55:43.597 WARN  [ 1734] (spk_socket_connect.c:585) <api.SNet_ParseSocketOptionConfig> - Current system does not support larger SO_RCVBUF, set to 4096 K!
+20190419-23:55:43.624 ERROR [ 1734] (spk_tcp_connect.c:584) <api._SNet_ConnectToTcp> - connection refused! remoteIp[139.196.228.232], remotePort[5103], SO_ERROR[61]
+20190419-23:55:43.624 ERROR [ 1734] (mds_api.c:510) <api.MdsApi_Logon> - Connect to server failure! url[tcp://139.196.228.232:5103], error[61]
+20190419-23:55:43.624 ERROR [ 1734] (mds_api.c:3205) <api.MdsApi_InitTcpChannel2> - Logon MDS cluster (ReplicaSet) failure!
+20190419-23:55:43.625 ERROR [ 1734] (mds_api.c:2872) <api.MdsApi_InitAllByConvention> - Init tcp channel failure!
+20190419-23:56:32.335 WARN  [ 1750] (spk_socket_connect.c:575) <api.SNet_ParseSocketOptionConfig> - Current system does not support SO_KEEPALIVE!
+20190419-23:56:32.336 WARN  [ 1750] (spk_socket_connect.c:580) <api.SNet_ParseSocketOptionConfig> - Current system does not support TCP_QUICKACK!
+20190419-23:56:32.337 WARN  [ 1750] (spk_socket_connect.c:585) <api.SNet_ParseSocketOptionConfig> - Current system does not support larger SO_RCVBUF, set to 4096 K!
+20190419-23:56:32.337 WARN  [ 1750] (spk_socket_connect.c:575) <api.SNet_ParseSocketOptionConfig> - Current system does not support SO_KEEPALIVE!
+20190419-23:56:32.337 WARN  [ 1750] (spk_socket_connect.c:580) <api.SNet_ParseSocketOptionConfig> - Current system does not support TCP_QUICKACK!
+20190419-23:56:32.338 WARN  [ 1750] (spk_socket_connect.c:585) <api.SNet_ParseSocketOptionConfig> - Current system does not support larger SO_RCVBUF, set to 4096 K!
+20190419-23:56:32.338 WARN  [ 1750] (spk_socket_connect.c:575) <api.SNet_ParseSocketOptionConfig> - Current system does not support SO_KEEPALIVE!
+20190419-23:56:32.338 WARN  [ 1750] (spk_socket_connect.c:580) <api.SNet_ParseSocketOptionConfig> - Current system does not support TCP_QUICKACK!
+20190419-23:56:32.338 WARN  [ 1750] (spk_socket_connect.c:585) <api.SNet_ParseSocketOptionConfig> - Current system does not support larger SO_RCVBUF, set to 4096 K!
+20190419-23:56:32.338 WARN  [ 1750] (spk_socket_connect.c:575) <api.SNet_ParseSocketOptionConfig> - Current system does not support SO_KEEPALIVE!
+20190419-23:56:32.338 WARN  [ 1750] (spk_socket_connect.c:580) <api.SNet_ParseSocketOptionConfig> - Current system does not support TCP_QUICKACK!
+20190419-23:56:32.339 WARN  [ 1750] (spk_socket_connect.c:585) <api.SNet_ParseSocketOptionConfig> - Current system does not support larger SO_RCVBUF, set to 4096 K!
+20190419-23:56:32.339 WARN  [ 1750] (spk_socket_connect.c:575) <api.SNet_ParseSocketOptionConfig> - Current system does not support SO_KEEPALIVE!
+20190419-23:56:32.339 WARN  [ 1750] (spk_socket_connect.c:580) <api.SNet_ParseSocketOptionConfig> - Current system does not support TCP_QUICKACK!
+20190419-23:56:32.339 WARN  [ 1750] (spk_socket_connect.c:585) <api.SNet_ParseSocketOptionConfig> - Current system does not support larger SO_RCVBUF, set to 4096 K!
+20190419-23:56:32.339 WARN  [ 1750] (spk_socket_connect.c:575) <api.SNet_ParseSocketOptionConfig> - Current system does not support SO_KEEPALIVE!
+20190419-23:56:32.339 WARN  [ 1750] (spk_socket_connect.c:580) <api.SNet_ParseSocketOptionConfig> - Current system does not support TCP_QUICKACK!
+20190419-23:56:32.339 WARN  [ 1750] (spk_socket_connect.c:585) <api.SNet_ParseSocketOptionConfig> - Current system does not support larger SO_RCVBUF, set to 4096 K!
+20190419-23:56:32.408 ERROR [ 1750] (mds_api.c:620) <api.MdsApi_Logon> - Logon request rejected by server! url[tcp://139.196.228.232:5103], username[customer368], errCode[1009], errMsg[非法的客户端登陆用户名称]
+20190419-23:56:32.420 ERROR [ 1750] (mds_api.c:3205) <api.MdsApi_InitTcpChannel2> - Logon MDS cluster (ReplicaSet) failure!
+20190419-23:56:32.420 ERROR [ 1750] (mds_api.c:2872) <api.MdsApi_InitAllByConvention> - Init tcp channel failure!
+20190419-23:56:34.118 WARN  [ 1751] (spk_socket_connect.c:575) <api.SNet_ParseSocketOptionConfig> - Current system does not support SO_KEEPALIVE!
+20190419-23:56:34.118 WARN  [ 1751] (spk_socket_connect.c:580) <api.SNet_ParseSocketOptionConfig> - Current system does not support TCP_QUICKACK!
+20190419-23:56:34.119 WARN  [ 1751] (spk_socket_connect.c:585) <api.SNet_ParseSocketOptionConfig> - Current system does not support larger SO_RCVBUF, set to 4096 K!
+20190419-23:56:34.120 WARN  [ 1751] (spk_socket_connect.c:575) <api.SNet_ParseSocketOptionConfig> - Current system does not support SO_KEEPALIVE!
+20190419-23:56:34.120 WARN  [ 1751] (spk_socket_connect.c:580) <api.SNet_ParseSocketOptionConfig> - Current system does not support TCP_QUICKACK!
+20190419-23:56:34.120 WARN  [ 1751] (spk_socket_connect.c:585) <api.SNet_ParseSocketOptionConfig> - Current system does not support larger SO_RCVBUF, set to 4096 K!
+20190419-23:56:34.120 WARN  [ 1751] (spk_socket_connect.c:575) <api.SNet_ParseSocketOptionConfig> - Current system does not support SO_KEEPALIVE!
+20190419-23:56:34.120 WARN  [ 1751] (spk_socket_connect.c:580) <api.SNet_ParseSocketOptionConfig> - Current system does not support TCP_QUICKACK!
+20190419-23:56:34.121 WARN  [ 1751] (spk_socket_connect.c:585) <api.SNet_ParseSocketOptionConfig> - Current system does not support larger SO_RCVBUF, set to 4096 K!
+20190419-23:56:34.121 WARN  [ 1751] (spk_socket_connect.c:575) <api.SNet_ParseSocketOptionConfig> - Current system does not support SO_KEEPALIVE!
+20190419-23:56:34.121 WARN  [ 1751] (spk_socket_connect.c:580) <api.SNet_ParseSocketOptionConfig> - Current system does not support TCP_QUICKACK!
+20190419-23:56:34.121 WARN  [ 1751] (spk_socket_connect.c:585) <api.SNet_ParseSocketOptionConfig> - Current system does not support larger SO_RCVBUF, set to 4096 K!
+20190419-23:56:34.121 WARN  [ 1751] (spk_socket_connect.c:575) <api.SNet_ParseSocketOptionConfig> - Current system does not support SO_KEEPALIVE!
+20190419-23:56:34.122 WARN  [ 1751] (spk_socket_connect.c:580) <api.SNet_ParseSocketOptionConfig> - Current system does not support TCP_QUICKACK!
+20190419-23:56:34.122 WARN  [ 1751] (spk_socket_connect.c:585) <api.SNet_ParseSocketOptionConfig> - Current system does not support larger SO_RCVBUF, set to 4096 K!
+20190419-23:56:34.122 WARN  [ 1751] (spk_socket_connect.c:575) <api.SNet_ParseSocketOptionConfig> - Current system does not support SO_KEEPALIVE!
+20190419-23:56:34.122 WARN  [ 1751] (spk_socket_connect.c:580) <api.SNet_ParseSocketOptionConfig> - Current system does not support TCP_QUICKACK!
+20190419-23:56:34.122 WARN  [ 1751] (spk_socket_connect.c:585) <api.SNet_ParseSocketOptionConfig> - Current system does not support larger SO_RCVBUF, set to 4096 K!
+20190419-23:56:34.185 ERROR [ 1751] (mds_api.c:620) <api.MdsApi_Logon> - Logon request rejected by server! url[tcp://139.196.228.232:5103], username[customer368], errCode[1009], errMsg[非法的客户端登陆用户名称]
+20190419-23:56:34.197 ERROR [ 1751] (mds_api.c:3205) <api.MdsApi_InitTcpChannel2> - Logon MDS cluster (ReplicaSet) failure!
+20190419-23:56:34.197 ERROR [ 1751] (mds_api.c:2872) <api.MdsApi_InitAllByConvention> - Init tcp channel failure!
+20190419-23:56:35.601 WARN  [ 1752] (spk_socket_connect.c:575) <api.SNet_ParseSocketOptionConfig> - Current system does not support SO_KEEPALIVE!
+20190419-23:56:35.601 WARN  [ 1752] (spk_socket_connect.c:580) <api.SNet_ParseSocketOptionConfig> - Current system does not support TCP_QUICKACK!
+20190419-23:56:35.603 WARN  [ 1752] (spk_socket_connect.c:585) <api.SNet_ParseSocketOptionConfig> - Current system does not support larger SO_RCVBUF, set to 4096 K!
+20190419-23:56:35.603 WARN  [ 1752] (spk_socket_connect.c:575) <api.SNet_ParseSocketOptionConfig> - Current system does not support SO_KEEPALIVE!
+20190419-23:56:35.603 WARN  [ 1752] (spk_socket_connect.c:580) <api.SNet_ParseSocketOptionConfig> - Current system does not support TCP_QUICKACK!
+20190419-23:56:35.603 WARN  [ 1752] (spk_socket_connect.c:585) <api.SNet_ParseSocketOptionConfig> - Current system does not support larger SO_RCVBUF, set to 4096 K!
+20190419-23:56:35.604 WARN  [ 1752] (spk_socket_connect.c:575) <api.SNet_ParseSocketOptionConfig> - Current system does not support SO_KEEPALIVE!
+20190419-23:56:35.604 WARN  [ 1752] (spk_socket_connect.c:580) <api.SNet_ParseSocketOptionConfig> - Current system does not support TCP_QUICKACK!
+20190419-23:56:35.604 WARN  [ 1752] (spk_socket_connect.c:585) <api.SNet_ParseSocketOptionConfig> - Current system does not support larger SO_RCVBUF, set to 4096 K!
+20190419-23:56:35.604 WARN  [ 1752] (spk_socket_connect.c:575) <api.SNet_ParseSocketOptionConfig> - Current system does not support SO_KEEPALIVE!
+20190419-23:56:35.604 WARN  [ 1752] (spk_socket_connect.c:580) <api.SNet_ParseSocketOptionConfig> - Current system does not support TCP_QUICKACK!
+20190419-23:56:35.604 WARN  [ 1752] (spk_socket_connect.c:585) <api.SNet_ParseSocketOptionConfig> - Current system does not support larger SO_RCVBUF, set to 4096 K!
+20190419-23:56:35.605 WARN  [ 1752] (spk_socket_connect.c:575) <api.SNet_ParseSocketOptionConfig> - Current system does not support SO_KEEPALIVE!
+20190419-23:56:35.605 WARN  [ 1752] (spk_socket_connect.c:580) <api.SNet_ParseSocketOptionConfig> - Current system does not support TCP_QUICKACK!
+20190419-23:56:35.605 WARN  [ 1752] (spk_socket_connect.c:585) <api.SNet_ParseSocketOptionConfig> - Current system does not support larger SO_RCVBUF, set to 4096 K!
+20190419-23:56:35.605 WARN  [ 1752] (spk_socket_connect.c:575) <api.SNet_ParseSocketOptionConfig> - Current system does not support SO_KEEPALIVE!
+20190419-23:56:35.605 WARN  [ 1752] (spk_socket_connect.c:580) <api.SNet_ParseSocketOptionConfig> - Current system does not support TCP_QUICKACK!
+20190419-23:56:35.605 WARN  [ 1752] (spk_socket_connect.c:585) <api.SNet_ParseSocketOptionConfig> - Current system does not support larger SO_RCVBUF, set to 4096 K!
+20190419-23:56:35.667 ERROR [ 1752] (mds_api.c:620) <api.MdsApi_Logon> - Logon request rejected by server! url[tcp://139.196.228.232:5103], username[customer368], errCode[1009], errMsg[非法的客户端登陆用户名称]
+20190419-23:56:35.680 ERROR [ 1752] (mds_api.c:3205) <api.MdsApi_InitTcpChannel2> - Logon MDS cluster (ReplicaSet) failure!
+20190419-23:56:35.680 ERROR [ 1752] (mds_api.c:2872) <api.MdsApi_InitAllByConvention> - Init tcp channel failure!
+20190419-23:56:52.856 WARN  [ 1753] (spk_socket_connect.c:575) <api.SNet_ParseSocketOptionConfig> - Current system does not support SO_KEEPALIVE!
+20190419-23:56:52.857 WARN  [ 1753] (spk_socket_connect.c:580) <api.SNet_ParseSocketOptionConfig> - Current system does not support TCP_QUICKACK!
+20190419-23:56:52.858 WARN  [ 1753] (spk_socket_connect.c:585) <api.SNet_ParseSocketOptionConfig> - Current system does not support larger SO_RCVBUF, set to 4096 K!
+20190419-23:56:52.906 ERROR [ 1753] (mds_api.c:620) <api.MdsApi_Logon> - Logon request rejected by server! url[tcp://139.196.228.232:5103], username[customer368], errCode[1009], errMsg[非法的客户端登陆用户名称]
+20190419-23:56:52.918 ERROR [ 1753] (mds_api.c:3205) <api.MdsApi_InitTcpChannel2> - Logon MDS cluster (ReplicaSet) failure!
+20190419-23:56:52.918 ERROR [ 1753] (mds_api.c:2661) <api.MdsApi_InitAll> - Init tcp channel failure!
+20190419-23:56:55.494 WARN  [ 1754] (spk_socket_connect.c:575) <api.SNet_ParseSocketOptionConfig> - Current system does not support SO_KEEPALIVE!
+20190419-23:56:55.494 WARN  [ 1754] (spk_socket_connect.c:580) <api.SNet_ParseSocketOptionConfig> - Current system does not support TCP_QUICKACK!
+20190419-23:56:55.496 WARN  [ 1754] (spk_socket_connect.c:585) <api.SNet_ParseSocketOptionConfig> - Current system does not support larger SO_RCVBUF, set to 4096 K!
+20190419-23:56:55.543 ERROR [ 1754] (mds_api.c:620) <api.MdsApi_Logon> - Logon request rejected by server! url[tcp://139.196.228.232:5103], username[customer368], errCode[1009], errMsg[非法的客户端登陆用户名称]
+20190419-23:56:55.554 ERROR [ 1754] (mds_api.c:3205) <api.MdsApi_InitTcpChannel2> - Logon MDS cluster (ReplicaSet) failure!
+20190419-23:56:55.555 ERROR [ 1754] (mds_api.c:2661) <api.MdsApi_InitAll> - Init tcp channel failure!
