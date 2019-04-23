@@ -1,15 +1,18 @@
 ## ==> make 
 
 INC_DIR   = ../../../include
-#LIB_DIR   = ../../../linux64
-LIB_DIR   = ../../../macos64
+LIB_DIR   = ../../../linux64
+#LIB_DIR   = ../../../macos64
 
-CC_CFLAGS = -Wall -o2
+CC_CFLAGS = -Wall -O2
 #CC_LFLAGS = -lmds_api -lpthread -lm
-CC_LFLAGS = -loes_api -lpthread -lm
+CC_LFLAGS = -loes_api -lgo_http -lpthread -lm 
+
 
 all:
 	gcc $(CC_CFLAGS) -I$(INC_DIR) mds_client.c -L$(LIB_DIR) $(CC_LFLAGS) -o mds_client
+	#gcc $(CC_CFLAGS) -I$(INC_DIR) mds_client.c -L$(LIB_DIR) -L/usr/lib64/ $(CC_LFLAGS) -o mds1_client 
+	#gcc -o test -I. test.c -L. -lhello -L/usr/lib/x86_64-linux-gnu/ -lpthread -static
 	gcc $(CC_CFLAGS) -I$(INC_DIR) mds_subscribe.c -L$(LIB_DIR) $(CC_LFLAGS) -o mds_subscribe
 
 clean:

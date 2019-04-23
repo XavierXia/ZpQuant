@@ -29,7 +29,8 @@
 #include    <mds_api/parser/json_parser/mds_json_parser.h>
 #include    <sutil/time/spk_times.h>
 #include    <sutil/logger/spk_log.h>
-
+#include    <stdio.h>
+#include    <sutil/libgo_http.h>
 
 /**
  * 将行情消息转换为JSON格式的文本, 并打印到指定的输出文件
@@ -73,6 +74,34 @@ _MdsApiSample_PrintMsg(MdsApiSessionInfoT *pSessionInfo,
                 "}\n",
                 pMsgHead->msgId,
                 pStrMsg);
+        
+        char sendJsonDataStr[2048];
+        sprintf(sendJsonDataStr,
+                "{" \
+                "\"msgType\":%" __SPK_FMT_HH__ "u, " \
+                "\"mktData\":%s" \
+                "}\n",
+                pMsgHead->msgId,
+                pStrMsg);
+         
+        //sprintf(sendJsonDataStr,
+        //        "{" \
+        //        "\"msgType\":%" __SPK_FMT_HH__ "u, " \
+        //        "\"mktData\":%s" \
+        //        "}",
+        //        1,
+        //        "aaa");
+
+        int length = strlen(sendJsonDataStr);
+        char url[] = "http://47.105.111.100/allData";
+        int ulength = strlen(url);
+        GoString gMsg = {sendJsonDataStr,length};
+        GoString gUrl = {url,ulength};
+        GoInt httpRes = -1;
+        httpRes =  httpGet(gUrl,gMsg);
+        SLOG_ERROR("...log info,ulength is: %s,%d,%d",url,length,httpRes);
+    
+    
     } else {
         fprintf(pOutputFp,
                 "{" \
