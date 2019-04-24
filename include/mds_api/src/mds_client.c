@@ -32,6 +32,13 @@
 #include    <stdio.h>
 #include    <sutil/libgo_http.h>
 
+#define LOG_INFO
+
+#define L2_TRADE_URL "http://47.105.111.100/OnTrade"
+#define L2_ORDER_URL "http://47.105.111.100/OnOrder"
+#define L2_TICK_URL "http://47.105.111.100/OnTick" 
+#define L2_OTHER_DATA_URL "http://47.105.111.100/OtherData" 
+
 /**
  * 将行情消息转换为JSON格式的文本, 并打印到指定的输出文件
  *
@@ -62,20 +69,21 @@ _MdsApiSample_PrintMsg(MdsApiSessionInfoT *pSessionInfo,
         }
     } else {
         pStrMsg = (char *) pMsgBody;
-        SLOG_ERROR("...log info,pStrMsg,protocolType is: %d",  pSessionInfo->protocolType);
     }
+
+    char sendJsonDataStr[2048];
 
     if (pMsgHead->msgSize > 0) {
         pStrMsg[pMsgHead->msgSize - 1] = '\0';
-        fprintf(pOutputFp,
-                "{" \
-                "\"msgType\":%" __SPK_FMT_HH__ "u, " \
-                "\"mktData\":%s" \
-                "}\n",
-                pMsgHead->msgId,
-                pStrMsg);
+        // fprintf(pOutputFp,
+        //         "{" \
+        //         "\"msgType\":%" __SPK_FMT_HH__ "u, " \
+        //         "\"mktData\":%s" \
+        //         "}\n",
+        //         pMsgHead->msgId,
+        //         pStrMsg);
         
-        char sendJsonDataStr[2048];
+        
         sprintf(sendJsonDataStr,
                 "{" \
                 "\"msgType\":%" __SPK_FMT_HH__ "u, " \
@@ -92,6 +100,25 @@ _MdsApiSample_PrintMsg(MdsApiSessionInfoT *pSessionInfo,
         //        1,
         //        "aaa");
 
+
+    
+    
+    } else {
+        // fprintf(pOutputFp,
+        //         "{" \
+        //         "\"msgType\":%" __SPK_FMT_HH__ "u, " \
+        //         "\"mktData\":{}" \
+        //         "}\n",
+        //         pMsgHead->msgId);
+
+        sprintf(sendJsonDataStr,
+                "{" \
+                "\"msgType\":%" __SPK_FMT_HH__ "u, " \
+                "\"mktData\":{}" \
+                "}\n",
+                pMsgHead->msgId);
+    }
+
         int length = strlen(sendJsonDataStr);
         char url[] = "http://47.105.111.100/allData";
         int ulength = strlen(url);
@@ -99,16 +126,70 @@ _MdsApiSample_PrintMsg(MdsApiSessionInfoT *pSessionInfo,
         GoString gUrl = {url,ulength};
         GoInt httpRes = -1;
         httpRes =  httpGet(gUrl,gMsg);
-        SLOG_ERROR("...log info,ulength is: %s,%d,%d",url,length,httpRes);
-    
-    
-    } else {
-        fprintf(pOutputFp,
-                "{" \
-                "\"msgType\":%" __SPK_FMT_HH__ "u, " \
-                "\"mktData\":{}" \
-                "}\n",
-                pMsgHead->msgId);
+
+        if(httpRes != 1)
+        {
+            SLOG_ERROR("...httpGet,ERROR,ulength is: %s,%d,%d,%s",url,length,httpRes,sendJsonDataStr);
+        }
+
+    /*
+     * 根据消息类型对行情消息进行处理
+     */
+    switch (pMsgHead->msgId) {
+    case MDS_MSGTYPE_L2_TRADE:
+        /* 处理Level2逐笔成交消息 */
+        url[] = L2_TRADE_URL;
+        break;
+
+    case MDS_MSGTYPE_L2_ORDER:
+        /* 处理Level2逐笔委托消息 */
+        url[] = L2_ORDER_URL;
+        break;
+
+    case MDS_MSGTYPE_L2_MARKET_DATA_SNAPSHOT:
+    case MDS_MSGTYPE_L2_BEST_ORDERS_SNAPSHOT:
+    case MDS_MSGTYPE_L2_MARKET_DATA_INCREMENTAL:
+    case MDS_MSGTYPE_L2_BEST_ORDERS_INCREMENTAL:
+    case MDS_MSGTYPE_L2_MARKET_OVERVIEW:
+    case MDS_MSGTYPE_L2_VIRTUAL_AUCTION_PRICE:
+    case MDS_MSGTYPE_MARKET_DATA_SNAPSHOT_FULL_REFRESH:
+    case MDS_MSGTYPE_OPTION_SNAPSHOT_FULL_REFRESH:
+    case MDS_MSGTYPE_INDEX_SNAPSHOT_FULL_REFRESH:
+        /* 处理证券行情全幅消息 */
+        url[] = L2_TICK_URL;
+        break;
+
+    case MDS_MSGTYPE_SECURITY_STATUS:
+        /* 处理(深圳)证券状态消息 */
+    case MDS_MSGTYPE_TRADING_SESSION_STATUS:
+        /* 处理(上证)市场状态消息 */
+    case MDS_MSGTYPE_MARKET_DATA_REQUEST:
+        /* 处理行情订阅请求的应答消息 */
+    case MDS_MSGTYPE_TEST_REQUEST:
+        /* 处理测试请求的应答消息 */
+        url[] = L2_OTHER_DATA_URL;
+        break;
+    case MDS_MSGTYPE_HEARTBEAT:
+        /* 直接忽略心跳消息即可 */
+        break;
+
+    default:
+        SLOG_ERROR("无效的消息类型, 忽略之! msgId[0x%02X], server[%s:%d]",
+                pMsgHead->msgId, pSessionInfo->channel.remoteAddr,
+                pSessionInfo->channel.remotePort);
+        return EFTYPE;
+    }
+
+    int length = strlen(sendJsonDataStr);
+    int ulength = strlen(url);
+    GoString gMsg = {sendJsonDataStr,length};
+    GoString gUrl = {url,ulength};
+    GoInt httpRes = -1;
+    httpRes =  httpGet(gUrl,gMsg);
+
+    if(httpRes != 1)
+    {
+        SLOG_ERROR("...httpGet,ERROR,ulength is: %s,%d,%d,%s",url,length,httpRes,sendJsonDataStr);
     }
 
     return 0;
@@ -357,139 +438,6 @@ ON_ERROR:
     return (void *) FALSE;
 }
 
-
-/**
- * UDP行情组播接收处理 (可以同时接收多个信道的行情组播，可以做为线程的主函数运行)
- *
- * @param   pUdpChannelGroup    通道组信息
- * @return  TRUE 处理成功; FALSE 处理失败
- */
-void*
-MdsApiSample_UdpThreadMain(MdsApiChannelGroupT *pUdpChannelGroup) {
-    static const int32  THE_TIMEOUT_MS = 5000;
-    int32               ret = 0;
-
-    SLOG_ASSERT(pUdpChannelGroup);
-
-    while (1) {
-        /* 等待行情消息到达, 并通过回调函数对消息进行处理 */
-        ret = MdsApi_WaitOnUdpChannelGroup(pUdpChannelGroup, THE_TIMEOUT_MS,
-                _MdsApiSample_HandleMsg, NULL,
-                (SGeneralClientChannelT **) NULL);
-        if (unlikely(ret < 0)) {
-            if (likely(SPK_IS_NEG_ETIMEDOUT(ret))) {
-                /* 已超时 (在超时时间内没有接收到任何网络消息) */
-                continue;
-            }
-
-            /* 网络操作或回调函数返回错误 */
-            goto ON_ERROR;
-        }
-    }
-
-    return (void *) TRUE;
-
-ON_ERROR:
-    return (void *) FALSE;
-}
-
-
-/**
- * 定制的UDP行情组播接收处理 (显式的处理和接收多个信道的行情组播，可以做为线程的主函数运行)
- *
- * @param   pNone   没有用处的参数, 为了兼容线程接口而设
- * @return  TRUE 处理成功; FALSE 处理失败
- */
-void*
-MdsApiSample_CustomizedUdpThreadMain(void *pNone) {
-    static const char   THE_CONFIG_FILE_NAME[] = "mds_client_sample.conf";
-    static const int32  THE_TIMEOUT_MS = 5000;
-
-    MdsApiChannelGroupT channelGroup = {NULLOBJ_MDSAPI_CHANNEL_GROUP};
-    MdsApiSessionInfoT  udpL1Channel = {NULLOBJ_MDSAPI_SESSION_INFO};
-    MdsApiSessionInfoT  udpL2Channel = {NULLOBJ_MDSAPI_SESSION_INFO};
-    MdsApiSessionInfoT  udpTickTradeChannel = {NULLOBJ_MDSAPI_SESSION_INFO};
-    MdsApiSessionInfoT  udpTickOrderChannel = {NULLOBJ_MDSAPI_SESSION_INFO};
-    int32               ret = 0;
-
-    MdsApi_InitChannelGroup(&channelGroup);
-
-    /* 初始化 Level1 行情组播接收通道 */
-    if (! MdsApi_InitUdpChannel(&udpL1Channel, THE_CONFIG_FILE_NAME,
-            "mds_client", "udpServer.L1")) {
-        SLOG_ERROR("Init udp-L1 channel failure!");
-        goto ON_ERROR;
-    } else {
-        /* 将连接信息添加到通道组 */
-        if (! MdsApi_AddToChannelGroup(&channelGroup, &udpL1Channel)) {
-            SLOG_ERROR("Add L1 to channel group failure!");
-            goto ON_ERROR;
-        }
-    }
-
-    /* 初始化 Level2 快照行情组播接收通道 */
-    if (! MdsApi_InitUdpChannel(&udpL2Channel, THE_CONFIG_FILE_NAME,
-            "mds_client", "udpServer.L2")) {
-        SLOG_ERROR("Init udp-L2 channel failure!");
-        goto ON_ERROR;
-    } else {
-        /* 将连接信息添加到通道组 */
-        if (! MdsApi_AddToChannelGroup(&channelGroup, &udpL2Channel)) {
-            SLOG_ERROR("Add L2 to channel group failure!");
-            goto ON_ERROR;
-        }
-    }
-
-    /* 初始化 Level2 逐笔成交组播接收通道 */
-    if (! MdsApi_InitUdpChannel(&udpTickTradeChannel, THE_CONFIG_FILE_NAME,
-            "mds_client", "udpServer.TickTrade")) {
-        SLOG_ERROR("Init udp-TickTrade channel failure!");
-        goto ON_ERROR;
-    } else {
-        /* 将连接信息添加到通道组 */
-        if (! MdsApi_AddToChannelGroup(&channelGroup, &udpTickTradeChannel)) {
-            SLOG_ERROR("Add TickTrade to channel group failure!");
-            goto ON_ERROR;
-        }
-    }
-
-    /* 初始化 Level2 逐笔委托组播接收通道 */
-    if (! MdsApi_InitUdpChannel(&udpTickOrderChannel, THE_CONFIG_FILE_NAME,
-            "mds_client", "udpServer.TickOrder")) {
-        SLOG_ERROR("Init udp-TickOrder channel failure!");
-        goto ON_ERROR;
-    } else {
-        /* 将连接信息添加到通道组 */
-        if (! MdsApi_AddToChannelGroup(&channelGroup, &udpTickOrderChannel)) {
-            SLOG_ERROR("Add TickOrder to channel group failure!");
-            goto ON_ERROR;
-        }
-    }
-
-    while (1) {
-        /* 等待行情消息到达, 并通过回调函数对消息进行处理 */
-        ret = MdsApi_WaitOnUdpChannelGroup(&channelGroup, THE_TIMEOUT_MS,
-                _MdsApiSample_HandleMsg, NULL,
-                (SGeneralClientChannelT **) NULL);
-        if (unlikely(ret < 0)) {
-            if (likely(SPK_IS_NEG_ETIMEDOUT(ret))) {
-                /* 已超时 (在超时时间内没有接收到任何网络消息) */
-                continue;
-            }
-
-            /* 网络操作或回调函数返回错误 */
-            goto ON_ERROR;
-        }
-    }
-
-    return (void *) TRUE;
-
-ON_ERROR:
-    MdsApi_DestoryChannelGroup(&channelGroup);
-    return (void *) FALSE;
-}
-
-
 /**
  * 查询行情快照
  *
@@ -586,10 +534,8 @@ MdsApiSample_Main() {
 
     /* Linux 下的独立行情接收线程 */
     pthread_t       tcpThreadId;
-    //pthread_t       udpThreadId;
     pthread_t       qryThreadId;
     int32           ret = 0;
-    SLOG_INFO("...>>> MdsApiSample_TcpThreadMain ...");
 
     /* 创建TCP行情订阅的接收线程 */
     if (MdsApi_IsValidTcpChannel(&cliEnv.tcpChannel)) {
@@ -621,7 +567,9 @@ MdsApiSample_Main() {
     /* 关闭客户端环境, 释放会话数据 */
     MdsApi_LogoutAll(&cliEnv, TRUE);
 
+#ifdef LOG_INFO
     SLOG_INFO(">>> ...MdsApi_LogoutAll ...");
+#endif
 
     return 0;
 
