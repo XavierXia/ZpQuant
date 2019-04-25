@@ -39,6 +39,8 @@
 #define L2_TICK_URL "http://47.105.111.100/OnTick" 
 #define L2_OTHER_DATA_URL "http://47.105.111.100/OtherData" 
 
+char sendJsonDataStr[2048];
+
 /**
  * 将行情消息转换为JSON格式的文本, 并打印到指定的输出文件
  *
@@ -71,7 +73,6 @@ _MdsApiSample_PrintMsg(MdsApiSessionInfoT *pSessionInfo,
         pStrMsg = (char *) pMsgBody;
     }
 
-    char sendJsonDataStr[2048];
 
     if (pMsgHead->msgSize > 0) {
         pStrMsg[pMsgHead->msgSize - 1] = '\0';
@@ -119,31 +120,20 @@ _MdsApiSample_PrintMsg(MdsApiSessionInfoT *pSessionInfo,
                 pMsgHead->msgId);
     }
 
-        int length = strlen(sendJsonDataStr);
-        char url[] = "http://47.105.111.100/allData";
-        int ulength = strlen(url);
-        GoString gMsg = {sendJsonDataStr,length};
-        GoString gUrl = {url,ulength};
-        GoInt httpRes = -1;
-        httpRes =  httpGet(gUrl,gMsg);
-
-        if(httpRes != 1)
-        {
-            SLOG_ERROR("...httpGet,ERROR,ulength is: %s,%d,%d,%s",url,length,httpRes,sendJsonDataStr);
-        }
-
+    char url[100] = "http://47.105.111.100/allData";
+    
     /*
      * 根据消息类型对行情消息进行处理
      */
     switch (pMsgHead->msgId) {
     case MDS_MSGTYPE_L2_TRADE:
         /* 处理Level2逐笔成交消息 */
-        url[] = L2_TRADE_URL;
+        strcpy(url,L2_TRADE_URL);
         break;
 
     case MDS_MSGTYPE_L2_ORDER:
         /* 处理Level2逐笔委托消息 */
-        url[] = L2_ORDER_URL;
+        strcpy(url,L2_ORDER_URL);
         break;
 
     case MDS_MSGTYPE_L2_MARKET_DATA_SNAPSHOT:
@@ -156,7 +146,7 @@ _MdsApiSample_PrintMsg(MdsApiSessionInfoT *pSessionInfo,
     case MDS_MSGTYPE_OPTION_SNAPSHOT_FULL_REFRESH:
     case MDS_MSGTYPE_INDEX_SNAPSHOT_FULL_REFRESH:
         /* 处理证券行情全幅消息 */
-        url[] = L2_TICK_URL;
+        strcpy(url,L2_TICK_URL);
         break;
 
     case MDS_MSGTYPE_SECURITY_STATUS:
@@ -167,7 +157,7 @@ _MdsApiSample_PrintMsg(MdsApiSessionInfoT *pSessionInfo,
         /* 处理行情订阅请求的应答消息 */
     case MDS_MSGTYPE_TEST_REQUEST:
         /* 处理测试请求的应答消息 */
-        url[] = L2_OTHER_DATA_URL;
+        strcpy(url,L2_OTHER_DATA_URL);
         break;
     case MDS_MSGTYPE_HEARTBEAT:
         /* 直接忽略心跳消息即可 */
