@@ -36,10 +36,11 @@
 
 #define L2_TRADE_URL "http://47.105.111.100/OnTrade"
 #define L2_ORDER_URL "http://47.105.111.100/OnOrder"
-#define L2_TICK_URL "http://47.105.111.100/OnTick" 
-#define L2_OTHER_DATA_URL "http://47.105.111.100/OtherData" 
+#define L2_TICK_URL "http://47.105.111.100/OnTickL2" 
+#define L2_OTHER_DATA_URL "http://47.105.111.100/OtherData"
+#define L1_TICK_URL "http://47.105.111.100/OnTickL1" 
 
-char sendJsonDataStr[2048];
+char sendJsonDataStr[4096];
 
 /**
  * 将行情消息转换为JSON格式的文本, 并打印到指定的输出文件
@@ -73,6 +74,8 @@ _MdsApiSample_PrintMsg(MdsApiSessionInfoT *pSessionInfo,
         pStrMsg = (char *) pMsgBody;
     }
 
+    time_t sendDataCurrentTime = STime_GetSysTime();
+    time_t GetLastRecvTime = MdsApi_GetLastRecvTime(pSessionInfo);
 
     if (pMsgHead->msgSize > 0) {
         pStrMsg[pMsgHead->msgSize - 1] = '\0';
@@ -88,9 +91,13 @@ _MdsApiSample_PrintMsg(MdsApiSessionInfoT *pSessionInfo,
         sprintf(sendJsonDataStr,
                 "{" \
                 "\"msgType\":%" __SPK_FMT_HH__ "u, " \
+                "\"sendDCT\":%l, " \
+                "\"LastRecvT\":%l, " \
                 "\"mktData\":%s" \
                 "}\n",
                 pMsgHead->msgId,
+                sendDataCurrentTime,
+                GetLastRecvTime,
                 pStrMsg);
          
         //sprintf(sendJsonDataStr,
@@ -115,12 +122,17 @@ _MdsApiSample_PrintMsg(MdsApiSessionInfoT *pSessionInfo,
         sprintf(sendJsonDataStr,
                 "{" \
                 "\"msgType\":%" __SPK_FMT_HH__ "u, " \
+                "\"sendDCT\":%l, " \
+                "\"LastRecvT\":%l, " \
                 "\"mktData\":{}" \
                 "}\n",
-                pMsgHead->msgId);
+                pMsgHead->msgId,
+                sendDataCurrentTime,
+                GetLastRecvTime)
+        ;
     }
 
-    char url[100] = "http://47.105.111.100/allData";
+    char url[150] = "http://47.105.111.100/allData";
     
     /*
      * 根据消息类型对行情消息进行处理
@@ -142,11 +154,15 @@ _MdsApiSample_PrintMsg(MdsApiSessionInfoT *pSessionInfo,
     case MDS_MSGTYPE_L2_BEST_ORDERS_INCREMENTAL:
     case MDS_MSGTYPE_L2_MARKET_OVERVIEW:
     case MDS_MSGTYPE_L2_VIRTUAL_AUCTION_PRICE:
+        /* 处理证券行情全幅消息 */
+        strcpy(url,L2_TICK_URL);
+        break;
+
     case MDS_MSGTYPE_MARKET_DATA_SNAPSHOT_FULL_REFRESH:
     case MDS_MSGTYPE_OPTION_SNAPSHOT_FULL_REFRESH:
     case MDS_MSGTYPE_INDEX_SNAPSHOT_FULL_REFRESH:
         /* 处理证券行情全幅消息 */
-        strcpy(url,L2_TICK_URL);
+        strcpy(url,L1_TICK_URL);
         break;
 
     case MDS_MSGTYPE_SECURITY_STATUS:
@@ -179,7 +195,7 @@ _MdsApiSample_PrintMsg(MdsApiSessionInfoT *pSessionInfo,
 
     if(httpRes != 1)
     {
-        SLOG_ERROR("...httpGet,ERROR,ulength is: %s,%d,%d,%s",url,length,httpRes,sendJsonDataStr);
+        SLOG_ERROR("...httpGet,ERROR,mds_client,ulength is: %s,%d,%d,%s",url,length,httpRes,sendJsonDataStr);
     }
 
     return 0;

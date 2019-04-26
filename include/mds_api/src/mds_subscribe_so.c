@@ -214,31 +214,44 @@ MdsApiSample_HandleMsg(MdsApiSessionInfoT *pSessionInfo,
     return 0;
 }
 
-char THE_CONFIG_FILE_NAME[50]  = "mds_client.conf";
-int32  THE_TIMEOUT_MS = 1000;
-MdsApiClientEnvT cliEnv = {NULLOBJ_MDSAPI_CLIENT_ENV};
-char codeListString[300];
-
 //return为0，说明初始化失败
 int
-mds_subscribe_init(char* config_file_name,int timeout_ms){
+mds_subscribe_init(MdsApiClientEnvT cliEnv,char* config_file_name,int timeout_ms){
     
+    char THE_CONFIG_FILE_NAME[80];
     /* 配置文件 */
     strcpy(THE_CONFIG_FILE_NAME,config_file_name);
     /* 尝试等待行情消息到达的超时时间 (毫秒) */
     THE_TIMEOUT_MS = timeout_ms;
 
-        /* 初始化客户端环境 (配置文件参见: mds_client_sample.conf) */
+    int32               ret = 0;
+
+    /* 初始化客户端环境 (配置文件参见: mds_client_sample.conf) */
+    if (! MdsApi_InitAllByConvention(&cliEnv, THE_CONFIG_FILE_NAME)) {
+        return 0;
+    }
+
+    return 1;
+}
+
+/*
+int
+mds_subscribe_initAllByConvention(MdsApiClientEnvT cliEnv,char* config_file_name,int timeout_ms){
+
+    // 初始化客户端环境 (配置文件参见: mds_client_sample.conf) 
     if (! MdsApi_InitAllByConvention(&cliEnv, THE_CONFIG_FILE_NAME)) {
         return 0;
     }
     return 1;
 }
+*/
+
 
 //如"600000.SH, 600001.SH, 000001.SZ, 0000002.SZ"
 int
-mds_subscribe_ResubscribeByCodePrefix(char *zqCode){
+mds_subscribe_ResubscribeByCodePrefix(MdsApiClientEnvT cliEnv,char *zqCode){
 
+        char codeListString[300];
         strcpy(codeListString,zqCode);
         /* 根据证券代码列表重新订阅行情 (根据代码前缀区分所属市场) */
         if (! MdsApiSample_ResubscribeByCodePrefix(&cliEnv.tcpChannel,
@@ -249,8 +262,9 @@ mds_subscribe_ResubscribeByCodePrefix(char *zqCode){
 }
 
 int
-mds_subscribe_ResubscribeByCodePostfix(char *zqCode){
+mds_subscribe_ResubscribeByCodePostfix(MdsApiClientEnvT cliEnv,char *zqCode){
 
+        char codeListString[300];
         strcpy(codeListString,zqCode);
         /* 根据证券代码列表重新订阅行情 (根据代码前缀区分所属市场) */
         if (! MdsApiSample_ResubscribeByCodePostfix(&cliEnv.tcpChannel,
@@ -260,9 +274,11 @@ mds_subscribe_ResubscribeByCodePostfix(char *zqCode){
     return 1；
 }
 
-int mds_subscribe_WaitOnMsg(){
+int mds_subscribe_WaitOnMsg(MdsApiClientEnvT cliEnv){
 
     int32               ret = 0;
+    int32  THE_TIMEOUT_MS = 1000;
+
     while (1) {
         /* 等待行情消息到达, 并通过回调函数对消息进行处理 */
         ret = MdsApi_WaitOnMsg(&cliEnv.tcpChannel, THE_TIMEOUT_MS,
