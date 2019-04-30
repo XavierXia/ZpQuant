@@ -10,6 +10,7 @@ logger:info('%s','KRDataHandle begin!')
 function KRDataHandle:parse_request(data)
 	if not data or #data == 0 then return end
 	local value,err = cjson.decode(data)
+
     --[[
     if not value then
         local value = ngx.req.get_post_args()
@@ -27,8 +28,9 @@ function KRDataHandle:handle(ngx)
         ngx.exit(ngx.HTTP_BAD_REQUEST)    
     end
 
-	local requests = self:parse_request(body_str)
-    --ngx.log(ngx.ERR,tostring(body_str)) 
+	--local requests = self:parse_request(body_str)
+    local current_time = string.format(" %s",ngx.now())
+    ngx.log(ngx.ERR,tostring(body_str) .. current_time) 
 end
 
 return KRDataHandle

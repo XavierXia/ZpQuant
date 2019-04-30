@@ -31,6 +31,8 @@
 #include    <sutil/logger/spk_log.h>
 #include    <stdio.h>
 #include    <sutil/libgo_http.h>
+#include    <sutil/thread_pool.h>
+#include    <sutil/msg_log.h>
 
 #define LOG_INFO
 /*
@@ -41,12 +43,18 @@
 #define L1_TICK_URL "http://127.0.0.1/OnTickL1" 
 */
 
+/*
 #define L2_TRADE_URL "http://47.105.111.100/OnTrade"
 #define L2_ORDER_URL "http://47.105.111.100/OnOrder"
 #define L2_TICK_URL "http://47.105.111.100/OnTickL2" 
 #define L2_OTHER_DATA_URL "http://47.105.111.100/OtherData"
 #define L1_TICK_URL "http://47.105.111.100/OnTickL1" 
+*/
 
+#define KR_HQ_ALLDATA_URL "http://47.105.111.100/OnKrHQAllData"
+
+
+pthread_mutex_t mutex = PTHREAD_MUTEX_INITIALIZER;
 char sendJsonDataStr[4096];
 
 /**
@@ -138,59 +146,7 @@ _MdsApiSample_PrintMsg(MdsApiSessionInfoT *pSessionInfo,
                 GetLastRecvTime);
     }
 
-    char url[150] = "http://47.105.111.100/allData";
-    
-    /*
-     * 根据消息类型对行情消息进行处理
-     */
-    switch (pMsgHead->msgId) {
-    case MDS_MSGTYPE_L2_TRADE:
-        /* 处理Level2逐笔成交消息 */
-        strcpy(url,L2_TRADE_URL);
-        break;
-
-    case MDS_MSGTYPE_L2_ORDER:
-        /* 处理Level2逐笔委托消息 */
-        strcpy(url,L2_ORDER_URL);
-        break;
-
-    case MDS_MSGTYPE_L2_MARKET_DATA_SNAPSHOT:
-    case MDS_MSGTYPE_L2_BEST_ORDERS_SNAPSHOT:
-    case MDS_MSGTYPE_L2_MARKET_DATA_INCREMENTAL:
-    case MDS_MSGTYPE_L2_BEST_ORDERS_INCREMENTAL:
-    case MDS_MSGTYPE_L2_MARKET_OVERVIEW:
-    case MDS_MSGTYPE_L2_VIRTUAL_AUCTION_PRICE:
-        /* 处理证券行情全幅消息 */
-        strcpy(url,L2_TICK_URL);
-        break;
-
-    case MDS_MSGTYPE_MARKET_DATA_SNAPSHOT_FULL_REFRESH:
-    case MDS_MSGTYPE_OPTION_SNAPSHOT_FULL_REFRESH:
-    case MDS_MSGTYPE_INDEX_SNAPSHOT_FULL_REFRESH:
-        /* 处理证券行情全幅消息 */
-        strcpy(url,L1_TICK_URL);
-        break;
-
-    case MDS_MSGTYPE_SECURITY_STATUS:
-        /* 处理(深圳)证券状态消息 */
-    case MDS_MSGTYPE_TRADING_SESSION_STATUS:
-        /* 处理(上证)市场状态消息 */
-    case MDS_MSGTYPE_MARKET_DATA_REQUEST:
-        /* 处理行情订阅请求的应答消息 */
-    case MDS_MSGTYPE_TEST_REQUEST:
-        /* 处理测试请求的应答消息 */
-        strcpy(url,L2_OTHER_DATA_URL);
-        break;
-    case MDS_MSGTYPE_HEARTBEAT:
-        /* 直接忽略心跳消息即可 */
-        break;
-
-    default:
-        SLOG_ERROR("无效的消息类型, 忽略之! msgId[0x%02X], server[%s:%d]",
-                pMsgHead->msgId, pSessionInfo->channel.remoteAddr,
-                pSessionInfo->channel.remotePort);
-        return EFTYPE;
-    }
+    char url[60] = "http://47.105.111.100/OnKrHQAllData";
 
     int length = strlen(sendJsonDataStr);
     int ulength = strlen(url);
@@ -417,37 +373,27 @@ _MdsApiSample_OnTimeout(MdsApiSessionInfoT *pSessionInfo) {
  */
 void*
 MdsApiSample_TcpThreadMain(MdsApiSessionInfoT *pTcpChannel) {
+    pthread_mutex_lock(&mutex);
+    
     static const int32  THE_TIMEOUT_MS = 5000;
     int32               ret = 0;
 
     SLOG_ASSERT(pTcpChannel);
 
-    while (1) {
         /* 等待行情消息到达, 并通过回调函数对消息进行处理 */
         ret = MdsApi_WaitOnMsg(pTcpChannel, THE_TIMEOUT_MS,
                 _MdsApiSample_HandleMsg, NULL);
         if (unlikely(ret < 0)) {
             if (likely(SPK_IS_NEG_ETIMEDOUT(ret))) {
-                /* 执行超时检查 (检查会话是否已超时) */
-                if (likely(_MdsApiSample_OnTimeout(pTcpChannel) == 0)) {
-                    continue;
                 }
 
-                /* 会话已超时 */
-                goto ON_ERROR;
-            }
-
             if (SPK_IS_NEG_EPIPE(ret)) {
-                /* 连接已断开 */
             }
-            goto ON_ERROR;
         }
-    }
+    usleep(1000);
+    pthread_mutex_unlock(&mutex);
 
     return (void *) TRUE;
-
-ON_ERROR:
-    return (void *) FALSE;
 }
 
 /**
@@ -545,31 +491,24 @@ MdsApiSample_Main() {
     */
 
     /* Linux 下的独立行情接收线程 */
-    pthread_t       tcpThreadId;
-    pthread_t       qryThreadId;
-    int32           ret = 0;
 
-    /* 创建TCP行情订阅的接收线程 */
-    if (MdsApi_IsValidTcpChannel(&cliEnv.tcpChannel)) {
-        ret = pthread_create(&tcpThreadId, NULL,
-                (void* (*)(void *)) MdsApiSample_TcpThreadMain,
-                &cliEnv.tcpChannel);
-        if (unlikely(ret != 0)) {
-            SLOG_ERROR("创建行情接收线程失败! error[%d]", ret);
+   int rc;
+   void *pool;
+   int i;
+   
+   rc = threadpool_create(&pool, 0, 30 , 200, 500);
+    if (rc < 0) {
+        SLOG_ERROR("threadpool_create false\n");
+        goto ON_ERROR;
+    }
+    
+    for(i = 0; i<20;i++){
+        rc = threadpool_add_task(pool, (void* (*)(void *)) MdsApiSample_TcpThreadMain,&cliEnv.tcpChannel);    
+        if(rc<0){
+            SLOG_ERROR("threadpool_create false\n");
             goto ON_ERROR;
         }
-    }
-
-    /* 创建行情查询线程 */
-    if (MdsApi_IsValidQryChannel(&cliEnv.qryChannel)) {
-        ret = pthread_create(&qryThreadId, NULL,
-                (void* (*)(void *)) MdsApiSample_QueryThreadMain,
-                &cliEnv.qryChannel);
-        if (unlikely(ret != 0)) {
-            SLOG_ERROR("创建行情查询线程失败! error[%d]", ret);
-            goto ON_ERROR;
-        }
-    }
+    } 
 
     while(1)
     {
@@ -578,6 +517,7 @@ MdsApiSample_Main() {
 
     /* 关闭客户端环境, 释放会话数据 */
     MdsApi_LogoutAll(&cliEnv, TRUE);
+    threadpool_destroy(pool, FLAGS_WAIT_TASK_EXIT);
 
 #ifdef LOG_INFO
     SLOG_INFO(">>> ...MdsApi_LogoutAll ...");
@@ -588,6 +528,7 @@ MdsApiSample_Main() {
 ON_ERROR:
     /* 直接断开与服务器的连接并释放会话数据 */
     MdsApi_DestoryAll(&cliEnv);
+    threadpool_destroy(pool, FLAGS_WAIT_TASK_EXIT);
     return -1;
 }
 

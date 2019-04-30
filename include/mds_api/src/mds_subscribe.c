@@ -28,6 +28,10 @@
 #include    <mds_api/parser/mds_protocol_parser.h>
 #include    <mds_api/parser/json_parser/mds_json_parser.h>
 #include    <sutil/logger/spk_log.h>
+#include    <stdio.h>
+#include    <sutil/libgo_http.h>
+#include    <sutil/time/spk_times.h>
+
 
 #define L2_TRADE_URL "http://47.105.111.100/OnTrade"
 #define L2_ORDER_URL "http://47.105.111.100/OnOrder"
@@ -156,10 +160,10 @@ MdsApiSample_HandleMsg(MdsApiSessionInfoT *pSessionInfo,
         sprintf(sendJsonDataStr,
                 "{" \
                 "\"msgType\":%" __SPK_FMT_HH__ "u, " \
-                "\"sendDCT\":%l, " \
-                "\"LastRecvT\":%l, " \
+                "\"sendDCT\":%ld, " \
+                "\"LastRecvT\":%ld, " \
                 "\"mktData\":{}" \
-                "}\n",
+                "}",
                 pMsgHead->msgId,
                 sendDataCurrentTime,
                 GetLastRecvTime)
